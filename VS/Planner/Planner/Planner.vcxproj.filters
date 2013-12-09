@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\AStarPlanner">
+      <UniqueIdentifier>{93f10f4c-a700-4c7b-b388-b8b32f3b0c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AStarPlanner">
+      <UniqueIdentifier>{a4ce19f6-bc80-4979-8906-063f7196c1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pathfinding">
+      <UniqueIdentifier>{ababb0e4-5034-4be2-a144-8ca0e05b50ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pathfinding">
+      <UniqueIdentifier>{fa78e3dc-6c34-469e-8fb3-5fd46d6849f1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarPlanner.cpp">
+      <Filter>Source Files\AStarPlanner</Filter>
+    </ClCompile>
+    <ClCompile Include="PathGraph.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PathNode.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PlannerPlan.cpp">
+      <Filter>Source Files\AStarPlanner</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarOpenList.cpp">
+      <Filter>Source Files\AStarPlanner</Filter>
+    </ClCompile>
+    <ClCompile Include="PlannerNodeBase.cpp">
+      <Filter>Source Files\AStarPlanner</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IStarPlanner.h">
+      <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlannerGraph.h">
+      <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+    <ClInclude Include="PlannerPlan.h">
+      <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPlanner.h">
+      <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+    <ClInclude Include="PathGraph.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PathNode.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PlannerNodeBase.h">
+      <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarOpenList.h">
+      <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
