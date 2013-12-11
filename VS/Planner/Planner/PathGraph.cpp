@@ -1,37 +1,47 @@
 #include "PathGraph.h"
+#include <math.h>
 
-template<int width, int height>
-PathGraph::PathGraph(char* map[width][height]):
-	m_PathMap(map)
+PathGraph::PathGraph()
 {
-// 	{
-// 		{'1','2','3','4','5'},
-// 		{'1','2','3','4','5'},
-// 		{'1','2','3','4','5'},
-// 		{'1','2','3','4','5'},
-// 		{'1','2','3','4','5'}
-// 	}
-	
+
 }
-template<int width, int height>
-PlannerPlan PathGraph<width, height>::BuildPlan( std::vector<PlannerNodeBase*> nodes )
+PlannerPlan PathGraph::BuildPlan( std::vector<PlannerNodeBase*> nodes )
 {
 	return PlannerPlan(nodes);
 }
-template<int width, int height>
 std::vector<PlannerNodeBase*> PathGraph::GetNeighbors(PlannerNodeBase* node)
 {
-	return std::vector<PlannerNodeBase*>();
+	PathNode* pathNode = static_cast<PathNode*>(node);
+	std::vector<PlannerNodeBase*> neighbors;
+
+	PathNode* test = (PathNode*)GetReusableNode(0, [](){
+		return new PathNode(0, 0);
+	});
+
+	return neighbors;
 }
-template<int width, int height>
-float PathGraph::CalculateHeuristic( PlannerNodeBase* from, PlannerNodeBase* to )
+float PathGraph::CalculateCost( PlannerNodeBase *from, PlannerNodeBase* to )
 {
+	PathNode* fromPath = static_cast<PathNode*>(from);
+	PathNode* toPath = static_cast<PathNode*>(to);
 	// Only recalculate if no previous value is available
 
-	return -1.0f;
+	float distance = fabs((float)toPath->GetX() - fromPath->GetX() + toPath->GetY() - fromPath->GetY());
+	return distance;
 }
-template<int width, int height>
-bool PathGraph<width, height>::IsFinished( PlannerNodeBase* node )
+float PathGraph::CalculateHeuristic( PlannerNodeBase* from, PlannerNodeBase* to )
 {
-	return true;
+	PathNode* fromPath = static_cast<PathNode*>(from);
+	PathNode* toPath = static_cast<PathNode*>(to);
+	// Only recalculate if no previous value is available
+
+	float distance = fabs((float)toPath->GetX() - fromPath->GetX() + toPath->GetY() - fromPath->GetY());
+	return distance;
+}
+bool PathGraph::IsFinished( PlannerNodeBase* node, PlannerNodeBase* endNode)
+{
+	PathNode* pathNodeCurrent = static_cast<PathNode*>(node);
+	PathNode* pathNodeTo = static_cast<PathNode*>(endNode);
+
+	return (pathNodeCurrent->GetX() == pathNodeTo->GetX() && pathNodeCurrent->GetY() == pathNodeTo->GetY());
 }

@@ -1,9 +1,9 @@
 #include "AStarPlanner.h"
 #include "PlannerPlan.h"
 #include "PlannerNodeBase.h"
-#include "IPlannerGraph.h"
+#include "PlannerGraphBase.h"
 
-PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase* endNode, IPlannerGraph* graph )
+PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase* endNode, PlannerGraphBase* graph )
 {
 	std::vector<PlannerNodeBase*> neighbors;
 
@@ -14,7 +14,7 @@ PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase*
 	while(m_OpenList.HasNext()){
 		PlannerNodeBase* currentNode = m_OpenList.GetNext();
 		// Check if current node is goal
-		if(graph->IsFinished(currentNode))
+		if(graph->IsFinished(currentNode, endNode))
 			return PlannerPlan(std::vector<PlannerNodeBase*>());
 
 		// 3. Process each neighbor

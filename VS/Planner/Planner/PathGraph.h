@@ -1,24 +1,22 @@
-#include "IPlannerGraph.h"
+#pragma once
+
+#include "PlannerGraphBase.h"
 #include "PathNode.h"
-#include "PlannerPlan.h"
 
 #include <vector>
 
 
-template<int width, int height>
-class PathGraph : IPlannerGraph{
+class PathGraph : public PlannerGraphBase{
 public:
-	PathGraph(char* map[width][height]);
+	PathGraph();
 
 #pragma region IPlannerGraph
 	virtual PlannerPlan							BuildPlan(std::vector<PlannerNodeBase*> nodes);
 	virtual std::vector<PlannerNodeBase*>		GetNeighbors(PlannerNodeBase* node);
 	virtual float								CalculateCost(PlannerNodeBase *from, PlannerNodeBase* to);
 	virtual float								CalculateHeuristic( PlannerNodeBase* from, PlannerNodeBase* to );
-	virtual bool								IsFinished(PlannerNodeBase* node);
+	virtual bool								IsFinished(PlannerNodeBase* node, PlannerNodeBase* endNode);
 #pragma endregion IPlannerGraph
 
 private:
-	// temp stuff
-	char* m_PathMap[width][height];
 };

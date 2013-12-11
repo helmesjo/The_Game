@@ -11,4 +11,8 @@ public:
 	float				Heuristic;
 	float				EstimatedTotalCost;
 	NodeState			State;
+
+	bool operator < (const PlannerNodeBase& node){
+		return this->EstimatedTotalCost < node.EstimatedTotalCost;
+	}
 };

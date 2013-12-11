@@ -83,6 +83,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PathGraph.cpp" />
     <ClCompile Include="PathNode.cpp" />
+    <ClCompile Include="PlannerGraphBase.cpp" />
     <ClCompile Include="PlannerNodeBase.cpp" />
     <ClCompile Include="PlannerPlan.cpp" />
   </ItemGroup>
@@ -90,7 +91,7 @@
     <ClInclude Include="AStarOpenList.h" />
     <ClInclude Include="AStarPlanner.h" />
     <ClInclude Include="IStarPlanner.h" />
-    <ClInclude Include="IPlannerGraph.h" />
+    <ClInclude Include="PlannerGraphBase.h" />
     <ClInclude Include="PathGraph.h" />
     <ClInclude Include="PathNode.h" />
     <ClInclude Include="PlannerNodeBase.h" />

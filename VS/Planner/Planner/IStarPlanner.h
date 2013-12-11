@@ -1,12 +1,12 @@
 #pragma once
 
 class PlannerNodeBase;
-class IPlannerGraph;
+class PlannerGraphBase;
 class PlannerPlan;
 
 class IStarPlanner{
 public:
 	virtual ~IStarPlanner(){}
 
-	virtual PlannerPlan FindPlan(PlannerNodeBase* startNode, PlannerNodeBase* endNode, IPlannerGraph* graph) = 0;
+	virtual PlannerPlan FindPlan(PlannerNodeBase* startNode, PlannerNodeBase* endNode, PlannerGraphBase* graph) = 0;
 };
