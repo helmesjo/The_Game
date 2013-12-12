@@ -4,10 +4,11 @@
 
 class PathNode : public PlannerNodeBase{
 public:
-	PathNode(int x, int y);
+	PathNode(const int x, const int y);
 
 	int GetX();
 	int GetY();
+
 private:
 	int m_X;
 	int m_Y;

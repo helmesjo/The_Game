@@ -12,7 +12,7 @@ void AStarOpenList::AddNode( PlannerNodeBase* node )
 	}
 	
 	// Insert at correct position (asc sorting)
-	for(int i=m_SortedNodes.size()-1; i>0; i--){
+	for(int i=m_SortedNodes.size()-1; i>=0; i--){
 		if(node->EstimatedTotalCost <= m_SortedNodes[i]->EstimatedTotalCost){
 			m_SortedNodes.insert(m_SortedNodes.begin() + i + 1, node);
 			return;

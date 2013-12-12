@@ -1,7 +1,7 @@
 #include "PlannerGraphBase.h"
 
 //template<typename NodeType>
-PlannerNodeBase* PlannerGraphBase::GetReusableNode(int id, std::function<PlannerNodeBase*()> createNode){
+PlannerNodeBase* PlannerGraphBase::GetReusableNode(const int id, const std::function<PlannerNodeBase*()>& createNode){
 	auto itr = m_NodeTable.find(id);
 
 	PlannerNodeBase* node = nullptr;

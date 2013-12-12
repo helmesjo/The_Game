@@ -14,8 +14,17 @@ PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase*
 	while(m_OpenList.HasNext()){
 		PlannerNodeBase* currentNode = m_OpenList.GetNext();
 		// Check if current node is goal
-		if(graph->IsFinished(currentNode, endNode))
-			return PlannerPlan(std::vector<PlannerNodeBase*>());
+		if(graph->IsFinished(currentNode, endNode)){
+			std::vector<PlannerNodeBase*> steps;
+			PlannerNodeBase* parent = currentNode;
+			while(parent){
+				steps.push_back(parent);
+				parent = parent->Parent;
+			}
+
+			//return PlannerPlan(std::move(std::vector<PlannerNodeBase*>()));
+			return graph->BuildPlan(steps);
+		}
 
 		// 3. Process each neighbor
 		neighbors = graph->GetNeighbors(currentNode);

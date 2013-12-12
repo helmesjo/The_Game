@@ -3,17 +3,19 @@
 #include "PathGraph.h"
 
 int main(){
-	char derp[10][10] = 
-	{
-		{'1','x','x','x','x'},
-		{'x','x','x','x','x'},
-		{'x','x','x','x','x'},
-		{'x','x','x','x','x'},
-		{'x','x','x','x','2'}
-	};
 	PathGraph* pathGraph = new PathGraph();
 	AStarPlanner* planner = new AStarPlanner();
-	PlannerPlan plan = planner->FindPlan(new PathNode(0,0), new PathNode(9, 9), pathGraph);
+
+	PlannerNodeBase *startNode = pathGraph->GetReusableNode(0, [](){
+		return new PathNode(0, 0);
+	});
+	PlannerNodeBase *endNode = pathGraph->GetReusableNode(pathGraph->HEIGHT*pathGraph->HEIGHT-1+pathGraph->WIDTH-1, [pathGraph](){
+		return new PathNode(pathGraph->WIDTH-1, pathGraph->HEIGHT-1);
+	});
+
+	pathGraph->DebugPrint();
+	PlannerPlan plan = planner->FindPlan(startNode, endNode, pathGraph);
+	pathGraph->DebugPrint();
 
 	return 0;
 }

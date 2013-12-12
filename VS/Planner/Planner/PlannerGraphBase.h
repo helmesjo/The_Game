@@ -16,8 +16,8 @@ public:
 	virtual float							CalculateHeuristic(PlannerNodeBase* from, PlannerNodeBase* to)	= 0;
 	virtual bool							IsFinished(PlannerNodeBase* node, PlannerNodeBase* endNode)		= 0;
 
-protected:
-	PlannerNodeBase*						GetReusableNode(int id, std::function<PlannerNodeBase*()> createNode);
+//protected:
+	PlannerNodeBase*						GetReusableNode(const int id, const std::function<PlannerNodeBase*()>& createNode);
 private:
-	std::unordered_map<int, PlannerNodeBase*>	m_NodeTable;
+	std::unordered_map<size_t, PlannerNodeBase*>	m_NodeTable;
 };
