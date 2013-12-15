@@ -14,6 +14,6 @@ public:
 	int							Length();
 
 protected:
-	int							m_CurrentIndex;
+	unsigned int					m_CurrentIndex;
 	std::vector<PlannerNodeBase*>	m_Plan;
 };

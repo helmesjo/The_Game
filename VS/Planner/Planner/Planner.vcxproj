@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="AStarOpenList.cpp" />
     <ClCompile Include="AStarPlanner.cpp" />
+    <ClCompile Include="HTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PathGraph.cpp" />
     <ClCompile Include="PathNode.cpp" />
@@ -90,6 +91,7 @@
   <ItemGroup>
     <ClInclude Include="AStarOpenList.h" />
     <ClInclude Include="AStarPlanner.h" />
+    <ClInclude Include="HTimer.h" />
     <ClInclude Include="IStarPlanner.h" />
     <ClInclude Include="PlannerGraphBase.h" />
     <ClInclude Include="PathGraph.h" />

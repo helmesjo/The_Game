@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Pathfinding">
       <UniqueIdentifier>{fa78e3dc-6c34-469e-8fb3-5fd46d6849f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Misc">
+      <UniqueIdentifier>{15a1a3f5-6a11-4611-9ca7-2d8067a28a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{27ccabdc-40c4-4eac-bdd9-49e80460b7a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -32,9 +38,6 @@
     </ClCompile>
     <ClCompile Include="AStarPlanner.cpp">
       <Filter>Source Files\AStarPlanner</Filter>
-    </ClCompile>
-    <ClCompile Include="PathGraph.cpp">
-      <Filter>Source Files\Pathfinding</Filter>
     </ClCompile>
     <ClCompile Include="PathNode.cpp">
       <Filter>Source Files\Pathfinding</Filter>
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="PlannerGraphBase.cpp">
       <Filter>Source Files\AStarPlanner</Filter>
+    </ClCompile>
+    <ClCompile Include="HTimer.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="PathGraph.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="IStarPlanner.h">
       <Filter>Header Files\AStarPlanner</Filter>
+    </ClInclude>
+    <ClInclude Include="HTimer.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

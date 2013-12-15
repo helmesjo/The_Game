@@ -5,14 +5,22 @@
 
 PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase* endNode, PlannerGraphBase* graph )
 {
+	graph->Reset();
+	m_OpenList.Clear();
+
 	std::vector<PlannerNodeBase*> neighbors;
 
 	// 1. Add startnode to openList
 	m_OpenList.AddNode(startNode);
 
 	// 2. Process openList until plan found, or openList empty.
+	PlannerNodeBase* currentNode = nullptr;
 	while(m_OpenList.HasNext()){
-		PlannerNodeBase* currentNode = m_OpenList.GetNext();
+		currentNode = m_OpenList.GetNext();
+
+		//currentNode->tempIsCurrent = true;
+
+		//graph->DebugPrint();
 		// Check if current node is goal
 		if(graph->IsFinished(currentNode, endNode)){
 			std::vector<PlannerNodeBase*> steps;
@@ -23,20 +31,25 @@ PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase*
 			}
 
 			//return PlannerPlan(std::move(std::vector<PlannerNodeBase*>()));
+			//graph->DebugPrint();
 			return graph->BuildPlan(steps);
 		}
 
 		// 3. Process each neighbor
 		neighbors = graph->GetNeighbors(currentNode);
 		for(PlannerNodeBase* neighbor : neighbors){
-			if(neighbor->State == PlannerNodeBase::CLOSED)
-				continue;
+			//if(neighbor->State == PlannerNodeBase::CLOSED)
+			//	continue;
+
+			//neighbor->tempIsNeighbor = true;
+			//graph->DebugPrint();
+			//neighbor->tempIsNeighbor = false;
 
 			// 4. Calculate cost so far (to compare if already in openList)
 			float costSoFar = currentNode->CostSoFar + graph->CalculateCost(currentNode, neighbor);
 
 			// 5. If this node is unvisited, or it's in the openList and is a better path, set data. Else skip.
-			if(neighbor->State != PlannerNodeBase::UNVISITED && costSoFar >= neighbor->CostSoFar)
+			if(neighbor->State != PlannerNodeBase::NodeState::UNVISITED && costSoFar >= neighbor->CostSoFar)
 				continue;
 			else{
 				neighbor->Parent = currentNode;
@@ -46,11 +59,13 @@ PlannerPlan AStarPlanner::FindPlan( PlannerNodeBase* startNode, PlannerNodeBase*
 			}
 
 			// 6. Add to openlist (if not already in list, in that case just re-sort CHANGED node only)
-			if(neighbor->State == PlannerNodeBase::UNVISITED)
+			if(neighbor->State == PlannerNodeBase::NodeState::UNVISITED)
 				m_OpenList.AddNode(neighbor);
 			else
 				m_OpenList.Refresh(neighbor);
 		}
+		// tmp
+		//currentNode->tempIsCurrent = false;
 	}
 	
 	// No plan found, return empty

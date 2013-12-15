@@ -7,6 +7,7 @@ class PlannerNodeBase;
 class AStarOpenList{
 public:
 	void				AddNode(PlannerNodeBase* node);
+	void				Clear();
 	void				Refresh(PlannerNodeBase* node);
 	PlannerNodeBase*	GetNext();
 	bool				HasNext();
