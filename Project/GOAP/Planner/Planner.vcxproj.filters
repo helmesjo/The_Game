@@ -66,6 +66,9 @@
     <ClCompile Include="PathGraph.cpp">
       <Filter>Source Files\old\Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="StarPlanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlannerPlan.h">
@@ -94,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="HTimer.h">
       <Filter>Header Files\old\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Planner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StarPlanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

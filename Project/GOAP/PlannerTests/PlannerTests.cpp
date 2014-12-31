@@ -1,5 +1,11 @@
-#include "gtest/gtest.h"
+#include "gmock\gmock.h"
 #include <vector>
+#include <memory>
+
+#include "StarPlanner.h"
+#include "Node.h"
+
+using namespace std;
 
 /*
 class StarPlannerTest : public ::testing::Test{
@@ -7,9 +13,16 @@ class StarPlannerTest : public ::testing::Test{
 };
 */
 
-TEST(StarPlannerTest, NeverReturnsNull)
-{
-	std::vector<int> *plan = nullptr;
+class NodeMock : public Node{
+public:
+};
 
-	ASSERT_FALSE(plan == nullptr);
+TEST(StarPlanner, FindPlanPassingSameNodeReturnsEmptyPlan)
+{
+	StarPlanner planner;
+	NodeMock node;
+
+	vector<unique_ptr<Node>> plan = planner.FindPlan(node, node);
+
+	ASSERT_EQ(plan.size(), 0);
 }

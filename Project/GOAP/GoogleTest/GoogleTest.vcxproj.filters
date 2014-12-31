@@ -18,7 +18,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gtest-1.7.0\src\gtest_main.cc">
+    <ClCompile Include="gmock-1.7.0\src\gmock_main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gmock-1.7.0\src\gmock-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gtest-1.7.0\src\gtest-all.cc">

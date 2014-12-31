@@ -55,7 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,6 +72,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,17 +91,21 @@
     <ClCompile Include="PlannerGraphBase.cpp" />
     <ClCompile Include="PlannerNodeBase.cpp" />
     <ClCompile Include="PlannerPlan.cpp" />
+    <ClCompile Include="StarPlanner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStarOpenList.h" />
     <ClInclude Include="AStarPlanner.h" />
     <ClInclude Include="HTimer.h" />
     <ClInclude Include="IStarPlanner.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Planner.h" />
     <ClInclude Include="PlannerGraphBase.h" />
     <ClInclude Include="PathGraph.h" />
     <ClInclude Include="PathNode.h" />
     <ClInclude Include="PlannerNodeBase.h" />
     <ClInclude Include="PlannerPlan.h" />
+    <ClInclude Include="StarPlanner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
