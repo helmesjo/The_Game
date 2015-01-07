@@ -18,7 +18,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PlannerTests.cpp">
+    <ClCompile Include="GraphTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StarPlannerTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

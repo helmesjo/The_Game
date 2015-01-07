@@ -7,5 +7,6 @@ class Node;
 
 class Planner{
 public:
-	virtual std::vector<std::unique_ptr<Node>> FindPlan(const Node& startNode, const Node& endNode) = 0;
+	virtual ~Planner(){}
+	virtual std::vector<std::weak_ptr<Node>> FindPlan(const Node& startNode, const Node& endNode) = 0;
 };

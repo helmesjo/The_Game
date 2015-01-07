@@ -85,7 +85,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PlannerTests.cpp" />
+    <ClCompile Include="GraphTests.cpp" />
+    <ClCompile Include="StarPlannerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleTest\GoogleTest.vcxproj">

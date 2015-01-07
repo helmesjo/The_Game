@@ -96,6 +96,7 @@
   <ItemGroup>
     <ClInclude Include="AStarOpenList.h" />
     <ClInclude Include="AStarPlanner.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="HTimer.h" />
     <ClInclude Include="IStarPlanner.h" />
     <ClInclude Include="Node.h" />
