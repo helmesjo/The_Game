@@ -8,5 +8,5 @@ class Node;
 class Planner{
 public:
 	virtual ~Planner(){}
-	virtual std::vector<std::weak_ptr<Node>> FindPlan(const Node& startNode, const Node& endNode) = 0;
+	virtual std::vector<std::shared_ptr<Node>> FindPlan(const std::shared_ptr<Node>& startNode, const std::shared_ptr<Node>& endNode) = 0;
 };

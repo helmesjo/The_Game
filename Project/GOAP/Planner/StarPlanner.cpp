@@ -8,16 +8,16 @@ StarPlanner::StarPlanner(const Graph& graph):
 graph(graph){
 
 }
-vector<weak_ptr<Node>> StarPlanner::FindPlan(const Node& startNode, const Node& endNode){
-	vector<weak_ptr<Node>> nodes;
+vector<shared_ptr<Node>> StarPlanner::FindPlan(const shared_ptr<Node>& startNode, const shared_ptr<Node>& endNode){
+	vector<shared_ptr<Node>> nodes;
 
-	if (startNode == endNode)
+	if (startNode->IsEqual(*endNode))
 		return nodes;
 
 	// Get adjacent nodes
-	vector<weak_ptr<Node>> neighborNodes = graph.GetNeighbors(startNode);
+	vector<shared_ptr<Node>> neighborNodes = graph.GetNeighbors(*startNode);
 
-	for each (weak_ptr<Node> node in neighborNodes)
+	for (auto node : neighborNodes)
 		nodes.push_back(node);
 
 	return nodes;
