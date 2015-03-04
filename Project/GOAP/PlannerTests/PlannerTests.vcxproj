@@ -85,7 +85,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GraphTests.cpp" />
     <ClCompile Include="StarPlannerTests.cpp" />
   </ItemGroup>
   <ItemGroup>
