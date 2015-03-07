@@ -86,6 +86,7 @@
     <ClCompile Include="AStarPlanner.cpp" />
     <ClCompile Include="HTimer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenList.cpp" />
     <ClCompile Include="PathGraph.cpp" />
     <ClCompile Include="PathNode.cpp" />
     <ClCompile Include="PlannerGraphBase.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="HTimer.h" />
     <ClInclude Include="IStarPlanner.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="OpenList.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="PlannerGraphBase.h" />
     <ClInclude Include="PathGraph.h" />
