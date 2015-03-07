@@ -48,3 +48,8 @@ TEST(StarPlanner, FindPlanPassAdjacentNodesReturnsOneNode){
 
 	ASSERT_EQ(plan.size(), 1);
 }
+TEST(StarPlanner, GetAdjacentNodesValidGraphReturnsThreeAdjacentNodes){
+	GraphMock graph;
+	StarPlanner planner(graph);
+	// Test so that adjacent nodes are returned correctly
+}
