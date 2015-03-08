@@ -2,7 +2,7 @@
 
 #include "Planner.h"
 
-class Graph;
+struct Graph;
 
 class StarPlanner : public Planner{
 public:

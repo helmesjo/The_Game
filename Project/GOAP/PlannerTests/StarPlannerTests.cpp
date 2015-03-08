@@ -17,7 +17,7 @@ class StarPlannerTest : public ::testing::Test{
 
 class NodeMock : public Node{
 public:
-	MOCK_CONST_METHOD1(IsEqual, bool(const Node& node));
+	//MOCK_CONST_METHOD1(IsEqual, bool(const Node& node));
 };
 class GraphMock : public Graph{
 public:
@@ -29,7 +29,7 @@ TEST(StarPlanner, FindPlanPassSameNodeReturnsZeroNodes)
 	GraphMock graph;
 	StarPlanner planner(graph);
 	auto node = make_shared<NodeMock>();
-	ON_CALL(*node, IsEqual(Ref(*node))).WillByDefault(Return(true));
+	//ON_CALL(*node, IsEqual(Ref(*node))).WillByDefault(Return(true));
 
 	vector<shared_ptr<Node>> plan = planner.FindPlan(node, node);
 
@@ -41,15 +41,10 @@ TEST(StarPlanner, FindPlanPassAdjacentNodesReturnsOneNode){
 	auto startNode = make_shared<NodeMock>();
 	auto adjacentNode = make_shared<NodeMock>();
 	vector<shared_ptr<Node>> adjacentNodes{ adjacentNode };
-	ON_CALL(*startNode, IsEqual(Ref(*adjacentNode))).WillByDefault(Return(false));
+	//ON_CALL(*startNode, IsEqual(Ref(*adjacentNode))).WillByDefault(Return(false));
 	ON_CALL(graph, GetNeighbors(Ref(*startNode))).WillByDefault(Return(adjacentNodes));
 
 	vector<shared_ptr<Node>> plan = planner.FindPlan(startNode, adjacentNode);
 
 	ASSERT_EQ(plan.size(), 1);
-}
-TEST(StarPlanner, GetAdjacentNodesValidGraphReturnsThreeAdjacentNodes){
-	GraphMock graph;
-	StarPlanner planner(graph);
-	// Test so that adjacent nodes are returned correctly
 }

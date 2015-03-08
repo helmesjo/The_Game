@@ -82,32 +82,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AStarOpenList.cpp" />
-    <ClCompile Include="AStarPlanner.cpp" />
-    <ClCompile Include="HTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenList.cpp" />
     <ClCompile Include="PathGraph.cpp" />
     <ClCompile Include="PathNode.cpp" />
-    <ClCompile Include="PlannerGraphBase.cpp" />
-    <ClCompile Include="PlannerNodeBase.cpp" />
-    <ClCompile Include="PlannerPlan.cpp" />
     <ClCompile Include="StarPlanner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AStarOpenList.h" />
-    <ClInclude Include="AStarPlanner.h" />
     <ClInclude Include="Graph.h" />
-    <ClInclude Include="HTimer.h" />
-    <ClInclude Include="IStarPlanner.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="OpenList.h" />
-    <ClInclude Include="Planner.h" />
-    <ClInclude Include="PlannerGraphBase.h" />
     <ClInclude Include="PathGraph.h" />
     <ClInclude Include="PathNode.h" />
-    <ClInclude Include="PlannerNodeBase.h" />
-    <ClInclude Include="PlannerPlan.h" />
+    <ClInclude Include="Planner.h" />
     <ClInclude Include="StarPlanner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

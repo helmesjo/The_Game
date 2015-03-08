@@ -4,7 +4,7 @@
 void OpenList::Add(const std::shared_ptr<Node>& node){
 	int index = 0;
 	for (auto node2 : m_Nodes){
-		if (node2->FCost < node->FCost)
+		if (node2->EstimatedTotalCost < node->EstimatedTotalCost)
 			break;
 		++index;
 	}

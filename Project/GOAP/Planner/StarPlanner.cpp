@@ -11,7 +11,8 @@ graph(graph){
 vector<shared_ptr<Node>> StarPlanner::FindPlan(const shared_ptr<Node>& startNode, const shared_ptr<Node>& endNode){
 	vector<shared_ptr<Node>> nodes;
 
-	if (startNode->IsEqual(*endNode))
+	//if (startNode->IsEqual(*endNode))
+	if (startNode == endNode)
 		return nodes;
 
 	// Get adjacent nodes

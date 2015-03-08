@@ -3,10 +3,9 @@
 #include <vector>
 #include <memory>
 
-class Node;
+struct Node;
 
-class Graph{
-public:
+struct Graph{
 	virtual ~Graph(){}
 	virtual std::vector<std::shared_ptr<Node>> GetNeighbors(const Node& node) const = 0;
 };

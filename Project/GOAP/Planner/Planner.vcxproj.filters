@@ -13,58 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\old">
-      <UniqueIdentifier>{c6f0f893-2828-45b6-8be7-3c5e4c252ab0}</UniqueIdentifier>
+    <Filter Include="Header Files\Pathfinding">
+      <UniqueIdentifier>{292d23c7-6600-4d4f-ad6f-92269e1ca6e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\old\Pathfinding">
-      <UniqueIdentifier>{ababb0e4-5034-4be2-a144-8ca0e05b50ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\old\Misc">
-      <UniqueIdentifier>{15a1a3f5-6a11-4611-9ca7-2d8067a28a7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\old\AStarPlanner">
-      <UniqueIdentifier>{93f10f4c-a700-4c7b-b388-b8b32f3b0c6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\old">
-      <UniqueIdentifier>{f6e499eb-d3fd-4bd9-9f79-ea2704be5154}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\old\Pathfinding">
-      <UniqueIdentifier>{fa78e3dc-6c34-469e-8fb3-5fd46d6849f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\old\Misc">
-      <UniqueIdentifier>{27ccabdc-40c4-4eac-bdd9-49e80460b7a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\old\AStarPlanner">
-      <UniqueIdentifier>{a4ce19f6-bc80-4979-8906-063f7196c1dc}</UniqueIdentifier>
+    <Filter Include="Source Files\Pathfinding">
+      <UniqueIdentifier>{46df1a93-6d2d-4a2f-ab28-3c8a248a8c98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AStarPlanner.cpp">
-      <Filter>Source Files\old\AStarPlanner</Filter>
-    </ClCompile>
-    <ClCompile Include="PathNode.cpp">
-      <Filter>Source Files\old\Pathfinding</Filter>
-    </ClCompile>
-    <ClCompile Include="PlannerPlan.cpp">
-      <Filter>Source Files\old\AStarPlanner</Filter>
-    </ClCompile>
-    <ClCompile Include="AStarOpenList.cpp">
-      <Filter>Source Files\old\AStarPlanner</Filter>
-    </ClCompile>
-    <ClCompile Include="PlannerNodeBase.cpp">
-      <Filter>Source Files\old\AStarPlanner</Filter>
-    </ClCompile>
-    <ClCompile Include="PlannerGraphBase.cpp">
-      <Filter>Source Files\old\AStarPlanner</Filter>
-    </ClCompile>
-    <ClCompile Include="HTimer.cpp">
-      <Filter>Source Files\old\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="PathGraph.cpp">
-      <Filter>Source Files\old\Pathfinding</Filter>
     </ClCompile>
     <ClCompile Include="StarPlanner.cpp">
       <Filter>Source Files</Filter>
@@ -72,35 +30,14 @@
     <ClCompile Include="OpenList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PathNode.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PathGraph.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PlannerPlan.h">
-      <Filter>Header Files\old\AStarPlanner</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarPlanner.h">
-      <Filter>Header Files\old\AStarPlanner</Filter>
-    </ClInclude>
-    <ClInclude Include="PathGraph.h">
-      <Filter>Header Files\old\Pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="PathNode.h">
-      <Filter>Header Files\old\Pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="PlannerNodeBase.h">
-      <Filter>Header Files\old\AStarPlanner</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarOpenList.h">
-      <Filter>Header Files\old\AStarPlanner</Filter>
-    </ClInclude>
-    <ClInclude Include="PlannerGraphBase.h">
-      <Filter>Header Files\old\AStarPlanner</Filter>
-    </ClInclude>
-    <ClInclude Include="IStarPlanner.h">
-      <Filter>Header Files\old\AStarPlanner</Filter>
-    </ClInclude>
-    <ClInclude Include="HTimer.h">
-      <Filter>Header Files\old\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="Planner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -115,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="OpenList.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PathGraph.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PathNode.h">
+      <Filter>Header Files\Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

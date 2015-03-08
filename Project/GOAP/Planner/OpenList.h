@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 
-class Node;
+struct Node;
 
 class OpenList{
 public:

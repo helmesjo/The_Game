@@ -1,9 +1,8 @@
 #pragma once
 
-class Node{
-public:
+struct Node{
 	virtual ~Node(){}
-	virtual bool IsEqual(const Node& node) const = 0;
+	//virtual bool IsEqual(const Node& node) const = 0;
 
-	float FCost = 0.0f;
+	float EstimatedTotalCost = 0.0f;
 };

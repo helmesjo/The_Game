@@ -1,28 +1,17 @@
 #pragma once
 
-#include "PlannerGraphBase.h"
-#include "PathNode.h"
-
+#include "Graph.h"
 #include <vector>
+#include <memory>
 
-class PathGraph : public PlannerGraphBase{
+class PathNode;
+
+class PathGraph : public Graph{
 public:
-	static const int	WIDTH = 20;
-	static const int	HEIGHT = 20;
+	PathGraph(std::vector<std::shared_ptr<PathNode>> nodes);
 
-	PathGraph();
-
-	virtual void DebugPrint();
-
-#pragma region PlannerGraphBase
-	virtual PlannerPlan							BuildPlan(std::vector<PlannerNodeBase*> nodes);
-	virtual std::vector<PlannerNodeBase*>		GetNeighbors(PlannerNodeBase* node);
-	virtual float								CalculateCost(PlannerNodeBase *from, PlannerNodeBase* to);
-	virtual float								CalculateHeuristic( PlannerNodeBase* from, PlannerNodeBase* to );
-	virtual bool								IsFinished(PlannerNodeBase* node, PlannerNodeBase* endNode);
-#pragma endregion PlannerGraphBase
+	virtual std::vector<std::shared_ptr<Node>> GetNeighbors(const Node& node) const override;
 
 private:
-	char		m_Grid[WIDTH][HEIGHT];
-	char		m_DefaultGrid[WIDTH][HEIGHT];
+	std::vector<std::shared_ptr<PathNode>> m_Nodes;
 };

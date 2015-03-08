@@ -3,10 +3,9 @@
 #include <vector>
 #include <memory>
 
-class Node;
+struct Node;
 
-class Planner{
-public:
+struct Planner{
 	virtual ~Planner(){}
 	virtual std::vector<std::shared_ptr<Node>> FindPlan(const std::shared_ptr<Node>& startNode, const std::shared_ptr<Node>& endNode) = 0;
 };
