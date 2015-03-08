@@ -16,16 +16,19 @@ PathGraph::PathGraph(std::vector<std::shared_ptr<PathNode>> nodes)
 }
 
 std::vector<std::shared_ptr<Node>> PathGraph::GetNeighbors(const Node& node) const{
-	auto pathNode = (const PathNode&)node;
+	auto& pathNode = (const PathNode&)node;
 
 	std::vector<std::shared_ptr<Node>> neighbors;
 
-	for (auto node : m_Nodes){
-		int xDist = abs(pathNode.getX() - node->getX());
-		int yDist = abs(pathNode.getY() - node->getY());
+	for (auto node2 : m_Nodes){
+		if (&pathNode == node2.get())
+			continue;
+
+		int xDist = abs(pathNode.getX() - node2->getX());
+		int yDist = abs(pathNode.getY() - node2->getY());
 
 		if (xDist <= 1 && yDist <= 1)
-			neighbors.push_back(node);
+			neighbors.push_back(node2);
 	}
 
 	return neighbors;
