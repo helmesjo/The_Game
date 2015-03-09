@@ -6,7 +6,6 @@ class PathNode : public Node{
 public:
 	PathNode(const int x, const int y);
 
-	//virtual bool IsEqual(const Node& node) const override;
 	int getX() const;
 	int getY() const;
 

@@ -8,10 +8,6 @@
 
 using namespace std;
 
-bool IsSame(const Node& node, shared_ptr<Node>& node2){
-	return &node == node2.get();
-}
-
 TEST(PathGraph, GetNeighborsOneNodeReturnsEightNeighbors){
 	// Arrange
 	vector<shared_ptr<PathNode>> nodes;

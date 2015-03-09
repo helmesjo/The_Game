@@ -11,15 +11,21 @@ graph(graph){
 vector<shared_ptr<Node>> StarPlanner::FindPlan(const shared_ptr<Node>& startNode, const shared_ptr<Node>& endNode){
 	vector<shared_ptr<Node>> nodes;
 
-	//if (startNode->IsEqual(*endNode))
 	if (startNode == endNode)
 		return nodes;
 
-	// Get adjacent nodes
-	vector<shared_ptr<Node>> neighborNodes = graph.GetNeighbors(*startNode);
+	m_OpenList.Add(startNode);
 
-	for (auto node : neighborNodes)
-		nodes.push_back(node);
+	shared_ptr<Node> currentNode;
+	vector<shared_ptr<Node>> neighborNodes;
+	while (m_OpenList.size() > 0){
+		currentNode = m_OpenList.PopBest();
+		// Get adjacent nodes
+		neighborNodes = graph.GetNeighbors(*startNode);
+
+		for (auto node : neighborNodes)
+			nodes.push_back(node);
+	}
 
 	return nodes;
 }

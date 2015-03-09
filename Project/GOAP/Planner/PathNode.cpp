@@ -11,9 +11,3 @@ int PathNode::getX() const{
 int PathNode::getY() const{
 	return m_Y;
 }
-
-/*
-bool PathNode::IsEqual(const Node& node) const{
-	return false;
-}
-*/

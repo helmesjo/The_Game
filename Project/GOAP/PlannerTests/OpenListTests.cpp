@@ -13,6 +13,14 @@ public:
 	MOCK_CONST_METHOD1(IsEqual, bool(const Node& node));
 };
 
+TEST(OpenList, AddAddOneNodeReturnsSizeOne){
+	OpenList openList;
+	auto node = make_shared<NodeMock>();
+
+	openList.Add(node);
+
+	ASSERT_EQ(openList.size(), 1);
+}
 TEST(OpenList, AddAddTwoNodesReturnNodeWithLowestFCost){
 	OpenList openList;
 	auto node1 = make_shared<NodeMock>();
@@ -27,4 +35,10 @@ TEST(OpenList, AddAddTwoNodesReturnNodeWithLowestFCost){
 
 	auto bestNode = openList.PopBest();
 	ASSERT_TRUE(bestNode == node2);
+}
+TEST(OpenList, PopBestEmptyListThrowsException){
+	OpenList openList;
+
+	ASSERT_EQ(openList.size(), 0);
+	EXPECT_THROW(openList.PopBest(), std::out_of_range);
 }

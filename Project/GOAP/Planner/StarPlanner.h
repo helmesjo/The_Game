@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Planner.h"
+#include "OpenList.h"
 
 struct Graph;
 
@@ -11,4 +12,5 @@ public:
 
 private:
 	const Graph& graph;
+	OpenList m_OpenList;
 };
