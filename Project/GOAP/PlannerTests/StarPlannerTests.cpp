@@ -32,14 +32,15 @@ TEST(StarPlanner, FindPlanPassSameNodeReturnsZeroNodes)
 	ASSERT_EQ(plan.size(), 0);
 }
 TEST(StarPlanner, FindPlanPassAdjacentNodesReturnsOneNode){
+	// Arrange
 	GraphMock graph;
 	StarPlanner planner(graph);
 	auto startNode = make_shared<NodeMock>();
 	auto adjacentNode = make_shared<NodeMock>();
 	vector<shared_ptr<Node>> adjacentNodes{ adjacentNode };
 	ON_CALL(graph, GetNeighbors(Ref(*startNode))).WillByDefault(Return(adjacentNodes));
-
+	// Act
 	vector<shared_ptr<Node>> plan = planner.FindPlan(startNode, adjacentNode);
-
+	// Assert
 	ASSERT_EQ(plan.size(), 1);
 }

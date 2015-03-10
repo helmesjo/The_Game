@@ -8,10 +8,7 @@
 using namespace std;
 using namespace ::testing;
 
-class NodeMock : public Node{
-public:
-	MOCK_CONST_METHOD1(IsEqual, bool(const Node& node));
-};
+class NodeMock : public Node{};
 
 TEST(OpenList, AddAddOneNodeReturnsSizeOne){
 	OpenList openList;
@@ -27,9 +24,9 @@ TEST(OpenList, AddAddThreeNodesReturnsNodeWithLowestFCost){
 	auto node1 = make_shared<NodeMock>();
 	auto node2 = make_shared<NodeMock>();
 	auto node3 = make_shared<NodeMock>();
-	node1->EstimatedTotalCost = 8;
-	node2->EstimatedTotalCost = 5;
-	node3->EstimatedTotalCost = 10;
+	node1->setCostSoFar(8);
+	node2->setCostSoFar(5);
+	node3->setCostSoFar(10);
 	openList.Add(node1);
 	openList.Add(node2);
 	openList.Add(node3);
@@ -52,12 +49,12 @@ TEST(OpenList, AddReaddNodeWithBetterFScoreReturnsNodeFirst){
 	OpenList openList;
 	auto node1 = make_shared<NodeMock>();
 	auto node2 = make_shared<NodeMock>();
-	node1->EstimatedTotalCost = 8;
-	node2->EstimatedTotalCost = 5;
+	node1->setCostSoFar(8);
+	node2->setCostSoFar(5);
 	openList.Add(node1);
 	openList.Add(node2);
 	// Act
-	node1->EstimatedTotalCost = 3;
+	node1->setCostSoFar(3);
 	openList.Add(node1);
 	// Assert
 	ASSERT_TRUE(openList.PopBest() == node1);

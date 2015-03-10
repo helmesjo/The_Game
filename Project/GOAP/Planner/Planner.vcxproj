@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="OpenList.cpp" />
     <ClCompile Include="PathGraph.cpp" />
     <ClCompile Include="PathNode.cpp" />
