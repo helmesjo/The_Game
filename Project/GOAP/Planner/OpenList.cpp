@@ -2,7 +2,7 @@
 #include "Node.h"
 #include <algorithm>
 
-void OpenList::Add(const std::shared_ptr<Node>& node){
+void OpenList::add(const std::shared_ptr<Node>& node){
 	if (std::find(m_Nodes.begin(), m_Nodes.end(), node) != m_Nodes.end()){
 		auto it = std::remove(m_Nodes.begin(), m_Nodes.end(), node);
 		m_Nodes.erase(it, m_Nodes.end());
@@ -17,7 +17,7 @@ void OpenList::Add(const std::shared_ptr<Node>& node){
 
 	m_Nodes.insert(m_Nodes.begin() + index, node);
 }
-std::shared_ptr<Node> OpenList::PopBest(){
+std::shared_ptr<Node> OpenList::popBest(){
 	if (size() == 0)
 		throw std::out_of_range("OpenList is empty!");
 

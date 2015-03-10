@@ -10,15 +10,15 @@ using namespace ::testing;
 
 class NodeMock : public Node{};
 
-TEST(OpenList, AddAddOneNodeReturnsSizeOne){
+TEST(OpenList, Add_AddOneNode_ReturnsSizeOne){
 	OpenList openList;
 	auto node = make_shared<NodeMock>();
 
-	openList.Add(node);
+	openList.add(node);
 
 	ASSERT_EQ(openList.size(), 1);
 }
-TEST(OpenList, AddAddThreeNodesReturnsNodeWithLowestFCost){
+TEST(OpenList, Add_AddThreeNodes_ReturnsNodeWithLowestFCost){
 	// Arrange
 	OpenList openList;
 	auto node1 = make_shared<NodeMock>();
@@ -27,51 +27,51 @@ TEST(OpenList, AddAddThreeNodesReturnsNodeWithLowestFCost){
 	node1->setCostSoFar(8);
 	node2->setCostSoFar(5);
 	node3->setCostSoFar(10);
-	openList.Add(node1);
-	openList.Add(node2);
-	openList.Add(node3);
+	openList.add(node1);
+	openList.add(node2);
+	openList.add(node3);
 	// Act
-	auto bestNode = openList.PopBest();
+	auto bestNode = openList.popBest();
 	// Assert
 	ASSERT_TRUE(bestNode == node2);
 }
-TEST(OpenList, AddAddSameNodeTwiceReturnsSizeOne){
+TEST(OpenList, Add_AddSameNodeTwice_ReturnsSizeOne){
 	OpenList openList;
 	auto node = make_shared<NodeMock>();
 
-	openList.Add(node);
-	openList.Add(node);
+	openList.add(node);
+	openList.add(node);
 
 	ASSERT_EQ(openList.size(), 1);
 }
-TEST(OpenList, AddReaddNodeWithBetterFScoreReturnsNodeFirst){
+TEST(OpenList, Add_ReaddNodeWithBetterFScore_ReturnsNodeWithBestF){
 	// Arrange
 	OpenList openList;
 	auto node1 = make_shared<NodeMock>();
 	auto node2 = make_shared<NodeMock>();
 	node1->setCostSoFar(8);
 	node2->setCostSoFar(5);
-	openList.Add(node1);
-	openList.Add(node2);
+	openList.add(node1);
+	openList.add(node2);
 	// Act
 	node1->setCostSoFar(3);
-	openList.Add(node1);
+	openList.add(node1);
 	// Assert
-	ASSERT_TRUE(openList.PopBest() == node1);
+	ASSERT_TRUE(openList.popBest() == node1);
 }
-TEST(OpenList, PopBestEmptyListThrowsException){
+TEST(OpenList, PopBest_EmptyList_ThrowsException){
 	OpenList openList;
 
 	ASSERT_EQ(openList.size(), 0);
-	EXPECT_THROW(openList.PopBest(), std::out_of_range);
+	EXPECT_THROW(openList.popBest(), std::out_of_range);
 }
-TEST(OpenList, ClearAddNodesReturnsSizeZero){
+TEST(OpenList, Clear_AddNodesAndClear_ReturnsSizeZero){
 	// Arrange
 	OpenList openList;
 	auto node1 = make_shared<NodeMock>();
 	auto node2 = make_shared<NodeMock>();
-	openList.Add(node1);
-	openList.Add(node2);
+	openList.add(node1);
+	openList.add(node2);
 	// Act
 	openList.clear();
 	// Assert

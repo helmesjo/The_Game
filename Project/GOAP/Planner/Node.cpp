@@ -1,5 +1,11 @@
 #include "Node.h"
 
+void Node::setCost(const float cost){
+	m_Cost = cost;
+}
+float Node::getCost() const{
+	return m_Cost;
+}
 void Node::setCostSoFar(const float cost){
 	m_CostSoFar = cost;
 }

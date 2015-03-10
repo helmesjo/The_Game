@@ -7,8 +7,8 @@ struct Node;
 
 class OpenList{
 public:
-	void Add(const std::shared_ptr<Node>& node);
-	std::shared_ptr<Node> PopBest();
+	void add(const std::shared_ptr<Node>& node);
+	std::shared_ptr<Node> popBest();
 	const int size() const;
 	void clear();
 
