@@ -8,7 +8,7 @@
 
 using namespace std;
 
-TEST(PathGraph, GetNeighbors_PassCenterNode_ReturnsEightNeighbors){
+TEST(PathGraph, GetNeighbors_PassCenterNode_ReturnsStraightNeighbors){
 	// Arrange
 	auto node1 = std::make_shared<PathNode>(0, 0);
 	auto node2 = std::make_shared<PathNode>(0, 1);
@@ -35,11 +35,11 @@ TEST(PathGraph, GetNeighbors_PassCenterNode_ReturnsEightNeighbors){
 	auto neighbors = pathGraph.getNeighbors(*node1);
 
 	// Assert
-	ASSERT_EQ(neighbors.size(), 8);
+	ASSERT_EQ(neighbors.size(), 4);
 }
-TEST(PathGraph, calculateHeuristicCost_PassTwoValidNodes_ReturnsEstimatedDistance){
+TEST(PathGraph, CalculateHeuristicCost_PassTwoValidNodes_ReturnsEstimatedDistance){
 	auto node1 = std::make_shared<PathNode>(0, 0);
-	auto node2 = std::make_shared<PathNode>(6, 3);
+	auto node2 = std::make_shared<PathNode>(4, 3);
 	PathGraph pathGraph({ node1, node2 });
 
 	float heuristicCost = pathGraph.calculateHeuristicCost(*node1, *node2);

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 struct Node{
 	enum class State {
 		None,
@@ -9,6 +11,8 @@ struct Node{
 
 	virtual ~Node(){}
 
+	void setParent(const std::weak_ptr<Node>& parentNode);
+	const std::weak_ptr<Node> getParent() const;
 	void setCost(const float cost);
 	float getCost() const;
 	void setCostSoFar(const float cost);
@@ -21,7 +25,8 @@ struct Node{
 	
 private:
 
-	float m_Cost = 0.0f;
+	std::weak_ptr<Node>	m_Parent;
+	float m_Cost = 1.0f;
 	float m_CostSoFar = 0.0f;			// G 
 	float m_HeuristicCost = 0.0f;		// H
 	float m_EstimatedTotalCost = 0.0f;	// F

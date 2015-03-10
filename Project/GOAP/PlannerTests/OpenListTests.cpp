@@ -18,6 +18,18 @@ TEST(OpenList, Add_AddOneNode_ReturnsSizeOne){
 
 	ASSERT_EQ(openList.size(), 1);
 }
+TEST(OpenList, Add_AddOneNode_NodeChangesStateToOpen){
+	OpenList openList;
+	shared_ptr<Node> node = make_shared<NodeMock>();
+
+	openList.add(node);
+
+	ASSERT_EQ(node->getState(), Node::State::Open);
+
+	node = openList.popBest();
+
+	ASSERT_EQ(node->getState(), Node::State::Closed);
+}
 TEST(OpenList, Add_AddThreeNodes_ReturnsNodeWithLowestFCost){
 	// Arrange
 	OpenList openList;

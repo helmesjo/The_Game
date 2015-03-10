@@ -22,6 +22,7 @@ class NodeMock : public Node{};
 class GraphMock : public Graph{
 public:
 	MOCK_CONST_METHOD1(getNeighbors, std::vector<shared_ptr<Node>>(const Node& node));
+	MOCK_CONST_METHOD2(calculateHeuristicCost, float(const Node& node1, const Node& node2));
 };
 
 TEST(StarPlanner, FindPlan_PassSameNode_ReturnsEmptyPlan)
@@ -34,7 +35,7 @@ TEST(StarPlanner, FindPlan_PassSameNode_ReturnsEmptyPlan)
 
 	ASSERT_EQ(plan.size(), 0);
 }
-TEST(StarPlanner, FindPlan_PassTwoAdjacentNodes_ReturnsSizeOne){
+TEST(StarPlanner, FindPlan_PassTwoAdjacentNodes_ReturnsSizeTwo){
 	// Arrange
 	GraphMock graph;
 	StarPlanner planner(graph);
@@ -45,7 +46,7 @@ TEST(StarPlanner, FindPlan_PassTwoAdjacentNodes_ReturnsSizeOne){
 	// Act
 	vector<shared_ptr<Node>> plan = planner.findPlan(startNode, adjacentNode);
 	// Assert
-	ASSERT_EQ(plan.size(), 1);
+	ASSERT_EQ(plan.size(), 2);
 }
 TEST(StarPlanner, FindPlan_PassMultiplePathNodes_ReturnsCorrectPlan){
 	auto startNode = make_shared<PathNode>(0, 0);

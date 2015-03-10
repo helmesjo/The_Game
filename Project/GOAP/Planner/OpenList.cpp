@@ -16,12 +16,14 @@ void OpenList::add(const std::shared_ptr<Node>& node){
 	}
 
 	m_Nodes.insert(m_Nodes.begin() + index, node);
+	node->setState(Node::State::Open);
 }
 std::shared_ptr<Node> OpenList::popBest(){
 	if (size() == 0)
 		throw std::out_of_range("OpenList is empty!");
 
 	auto node = m_Nodes.back();
+	node->setState(Node::State::Closed);
 	m_Nodes.pop_back();
 	return node;
 }

@@ -1,5 +1,11 @@
 #include "Node.h"
 
+void Node::setParent(const std::weak_ptr<Node>& parentNode){
+	m_Parent = parentNode;
+}
+const std::weak_ptr<Node> Node::getParent() const{
+	return m_Parent;
+}
 void Node::setCost(const float cost){
 	m_Cost = cost;
 }

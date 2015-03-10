@@ -18,7 +18,7 @@ PathGraph::PathGraph(std::vector<std::shared_ptr<PathNode>> nodes)
 		std::cout << node.get();
 }
 PathGraph::PathGraph(const std::initializer_list<std::shared_ptr<PathNode>> nodes)
-	:PathGraph(nodes)
+	:m_Nodes(nodes)
 {}
 
 std::vector<std::shared_ptr<Node>> PathGraph::getNeighbors(const Node& node) const{
@@ -29,11 +29,15 @@ std::vector<std::shared_ptr<Node>> PathGraph::getNeighbors(const Node& node) con
 	for (auto node2 : m_Nodes){
 		if (&pathNode == node2.get())
 			continue;
-
+		/*
 		int xDist = abs(pathNode.getX() - node2->getX());
 		int yDist = abs(pathNode.getY() - node2->getY());
 
 		if (xDist <= 1 && yDist <= 1)
+			neighbors.push_back(node2);
+		*/
+		float dist = calculateHeuristicCost(node, *node2);
+		if (dist <= 1.0f)
 			neighbors.push_back(node2);
 	}
 
@@ -43,12 +47,12 @@ float PathGraph::calculateHeuristicCost(const Node& fromNode, const Node& toNode
 	auto& pathNodeFrom = dynamic_cast<const PathNode&>(fromNode);
 	auto& pathNodeTo = dynamic_cast<const PathNode&>(toNode);
 
-	float x1 = pathNodeFrom.getX();
-	float x2 = pathNodeTo.getX();
-	float y1 = pathNodeFrom.getY();
-	float y2 = pathNodeTo.getY();
+	int x1 = pathNodeFrom.getX();
+	int x2 = pathNodeTo.getX();
+	int y1 = pathNodeFrom.getY();
+	int y2 = pathNodeTo.getY();
 	// Calculate distance
-	float distance = sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+	float distance = (float)sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 
 	return distance;
 }
