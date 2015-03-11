@@ -7,16 +7,8 @@
 using namespace std;
 
 PathGraph::PathGraph(std::vector<std::shared_ptr<PathNode>> nodes)
-	//:m_Nodes(nodes)
-{
-	for (auto node : m_Nodes)
-		std::cout << node.get();
-
-	m_Nodes = nodes;
-
-	for (auto node : m_Nodes)
-		std::cout << node.get();
-}
+	:m_Nodes(nodes)
+{}
 PathGraph::PathGraph(const std::initializer_list<std::shared_ptr<PathNode>> nodes)
 	:m_Nodes(nodes)
 {}
@@ -29,13 +21,7 @@ std::vector<std::shared_ptr<Node>> PathGraph::getNeighbors(const Node& node) con
 	for (auto node2 : m_Nodes){
 		if (&pathNode == node2.get())
 			continue;
-		/*
-		int xDist = abs(pathNode.getX() - node2->getX());
-		int yDist = abs(pathNode.getY() - node2->getY());
-
-		if (xDist <= 1 && yDist <= 1)
-			neighbors.push_back(node2);
-		*/
+		
 		float dist = calculateHeuristicCost(node, *node2);
 		if (dist <= 1.0f)
 			neighbors.push_back(node2);

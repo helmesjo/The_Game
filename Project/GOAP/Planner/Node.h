@@ -29,6 +29,5 @@ private:
 	float m_Cost = 1.0f;
 	float m_CostSoFar = 0.0f;			// G 
 	float m_HeuristicCost = 0.0f;		// H
-	float m_EstimatedTotalCost = 0.0f;	// F
 	State m_State = State::None;
 };
