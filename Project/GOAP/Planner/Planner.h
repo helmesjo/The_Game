@@ -3,9 +3,11 @@
 #include <vector>
 #include <memory>
 
-struct Node;
+template<class T>
+class Node;
 
+template<class T>
 struct Planner{
 	virtual ~Planner(){}
-	virtual std::vector<std::shared_ptr<Node>> findPlan(const std::shared_ptr<Node>& startNode, const std::shared_ptr<Node>& endNode) = 0;
+	virtual std::vector<std::shared_ptr<Node<T>>> findPlan(const std::shared_ptr<Node<T>>& startNode, const std::shared_ptr<Node<T>>& endNode) = 0;
 };

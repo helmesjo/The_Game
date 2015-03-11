@@ -11,19 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A32F2369-8219-4768-A4E4-77FC62794CA3}</ProjectGuid>
+    <ProjectGuid>{29C65D31-7D32-432A-AE6C-E76A21E049BD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Planner</RootNamespace>
+    <RootNamespace>TemplatedPlannerTests</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -38,9 +38,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros">
-    <NuGetPackageImportStamp>8df23580</NuGetPackageImportStamp>
-  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -53,9 +51,8 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gmock-1.7.0;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gmock-1.7.0\include;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\Planner;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gtest-1.7.0\include;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gtest-1.7.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -70,9 +67,8 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gmock-1.7.0;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gmock-1.7.0\include;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\Planner;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gtest-1.7.0\include;C:\Users\Fred\Documents\GitHub\goap\Project\GOAP\GoogleTest\gtest-1.7.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,23 +78,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="OpenList.cpp" />
-    <ClCompile Include="PathGraph.cpp" />
-    <ClCompile Include="PathNode.cpp" />
-    <ClCompile Include="StarPlanner.cpp" />
+    <ProjectReference Include="..\GoogleTest\GoogleTest.vcxproj">
+      <Project>{bfc9943a-6932-4559-9d5b-d8d5182ddc00}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Planner\Planner.vcxproj">
+      <Project>{a32f2369-8219-4768-a4e4-77fc62794ca3}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="OpenList.h" />
-    <ClInclude Include="PathGraph.h" />
-    <ClInclude Include="PathNode.h" />
-    <ClInclude Include="Planner.h" />
-    <ClInclude Include="StarPlanner.h" />
+    <ClCompile Include="GraphTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
 </Project>

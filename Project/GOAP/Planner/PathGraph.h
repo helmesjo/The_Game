@@ -6,13 +6,13 @@
 
 class PathNode;
 
-class PathGraph : public Graph{
+class PathGraph : public IGraph<PathNode>{
 public:
 	PathGraph(std::vector<std::shared_ptr<PathNode>> nodes);
 	PathGraph(const std::initializer_list<std::shared_ptr<PathNode>> nodes);
 
-	virtual std::vector<std::shared_ptr<Node>> getNeighbors(const Node& node) const override;
-	virtual float calculateHeuristicCost(const Node& fromNode, const Node& toNode) const override;
+	virtual std::vector<PathNode*> getNeighbors(const PathNode& node) const override;
+	virtual float calculateHeuristicCost(const PathNode& fromNode, const PathNode& toNode) const override;
 
 private:
 	std::vector<std::shared_ptr<PathNode>> m_Nodes;

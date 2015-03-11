@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Node.h"
+#include "Graph.h"
 
-class PathNode : public Node{
+class PathNode{
 public:
 	PathNode(const int x, const int y);
 
