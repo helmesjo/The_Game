@@ -35,12 +35,12 @@ std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& e
 
 	// 2. Iterate until openlist empty
 	while (m_OpenList.size() > 0){
-		auto currentNode = m_OpenList.popBest();
+		auto& currentNode = m_OpenList.popBest();
 		// 3. Get the best node (F-score) from the openlist and add it to the closed list.
 		// Stop if currentNode is the endNode (plan has been found)
 		if (&currentNode.getObject() == &endNode){
-			// Traverse the tree until end (start)
-			const Node<T>* parentNode = &currentNode;
+			// Traverse the tree until end (start, reverse order)
+			Node<T>* parentNode = &currentNode;
 			while (parentNode != nullptr){
 				nodes.insert(nodes.begin(), &parentNode->getObject());
 				parentNode = parentNode->getParent();
@@ -63,14 +63,14 @@ std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& e
 
 			// 7.1. If it's not in the openlist, set currentNode as parent and calculate the G- & H-costs and add it.
 			if (nodeState == State::None){
-				neighborNode->setParent(currentNode);
+				neighborNode->setParent(&currentNode);
 				neighborNode->setCostSoFar(costSoFar);
 				neighborNode->setHeuristicCost(heuristicCost);
 				m_OpenList.add(*neighborNode);
 			}
 			// 7.2. If it's already in the openlist, check if new G- & H-costs are better. If so update and re-add it.
 			else if (nodeState == State::Open && neighborNode->getEstimatedTotalCost() > estimatedTotalCost){
-				neighborNode->setParent(currentNode);
+				neighborNode->setParent(&currentNode);
 				neighborNode->setCostSoFar(costSoFar);
 				neighborNode->setHeuristicCost(heuristicCost);
 				m_OpenList.add(*neighborNode);

@@ -30,7 +30,7 @@ TEST(OpenList, Add_AddOneNode_NodeChangesStateToOpen){
 
 	ASSERT_EQ(node->getState(), State::Open);
 
-	auto bestNode = openList.popBest();
+	auto& bestNode = openList.popBest();
 
 	ASSERT_EQ(bestNode.getState(), State::Closed);
 }
@@ -50,7 +50,7 @@ TEST(OpenList, Add_AddThreeNodes_ReturnsNodeWithLowestFCost){
 	openList.add(*node2);
 	openList.add(*node3);
 	// Act
-	auto bestNode = openList.popBest();
+	auto& bestNode = openList.popBest();
 	// Assert
 	ASSERT_TRUE(&bestNode == node2.get());
 }

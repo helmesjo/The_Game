@@ -16,8 +16,8 @@ public:
 	~Node();
 
 	const T& getObject() const;
-	void setParent(Node<T>& parentNode);
-	const Node<T>* getParent() const;
+	void setParent(Node<T>* parentNode);
+	Node<T>* getParent() const;
 	void setCost(const float cost);
 	float getCost() const;
 	void setCostSoFar(const float cost);
@@ -31,7 +31,7 @@ public:
 private:
 
 	const T& m_Object;
-	Node<T>* m_Parent;
+	Node<T>* m_Parent = nullptr;
 	float m_Cost = 1.0f;
 	float m_CostSoFar = 0.0f;			// G 
 	float m_HeuristicCost = 0.0f;		// H
@@ -49,11 +49,11 @@ const T& Node<T>::getObject() const{
 	return m_Object;
 }
 template<class T>
-void Node<T>::setParent(Node<T>& parentNode){
-	m_Parent = &parentNode;
+void Node<T>::setParent(Node<T>* parentNode){
+	m_Parent = parentNode;
 }
 template<class T>
-const Node<T>* Node<T>::getParent() const{
+Node<T>* Node<T>::getParent() const{
 	return m_Parent;
 }
 template<class T>
