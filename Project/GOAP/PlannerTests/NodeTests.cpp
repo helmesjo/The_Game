@@ -6,10 +6,10 @@
 
 using namespace std;
 
-class NodeMock : public Node{};
+//class NodeMock : public Node{};
 
 TEST(Node, SetAllCosts_ValidValues_ReturnsCorrectEstimatedTotalValue){
-	auto node = make_shared<NodeMock>();
+	auto node = make_shared<Node<int>>();
 
 	node->setCostSoFar(10);
 	node->setHeuristicCost(5);

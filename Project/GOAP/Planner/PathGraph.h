@@ -8,6 +8,8 @@ class PathNode;
 
 class PathGraph : public IGraph<PathNode>{
 public:
+	virtual ~PathGraph(){}
+
 	PathGraph(std::vector<std::shared_ptr<PathNode>> nodes);
 	PathGraph(const std::initializer_list<std::shared_ptr<PathNode>> nodes);
 

@@ -18,7 +18,7 @@ public:
 private:
 	std::vector<std::shared_ptr<Node<T>>> m_Nodes;
 };
-/*
+
 template<class T>
 void OpenList<T>::add(const std::shared_ptr<Node<T>>& node){
 	/*
@@ -36,7 +36,7 @@ void OpenList<T>::add(const std::shared_ptr<Node<T>>& node){
 
 	m_Nodes.insert(m_Nodes.begin() + index, node);
 	node->setState(State::Open);
-	*
+	*/
 }
 template<class T>
 std::shared_ptr<Node<T>> OpenList<T>::popBest(){
@@ -48,7 +48,7 @@ std::shared_ptr<Node<T>> OpenList<T>::popBest(){
 	node->setState(Node::State::Closed);
 	m_Nodes.pop_back();
 	return node;
-	*
+	*/
 	return nullptr;
 }
 template<class T>
@@ -60,4 +60,3 @@ template<class T>
 void OpenList<T>::clear(){
 	//m_Nodes.clear();
 }
-*/

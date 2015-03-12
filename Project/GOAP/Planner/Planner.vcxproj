@@ -82,13 +82,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="OpenList.cpp" />
     <ClCompile Include="PathGraph.cpp" />
     <ClCompile Include="PathNode.cpp" />
-    <ClCompile Include="StarPlanner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h" />

@@ -7,22 +7,23 @@ template<class T>
 class Graph;
 
 template<class T>
-class StarPlanner : public Planner<T>{
+class StarPlanner{
 public:
-	StarPlanner(const Graph& graph);
-	virtual std::vector<std::shared_ptr<Node<T>> findPlan(const std::shared_ptr<Node<T>>& startNode, const std::shared_ptr<Node<T>>& endNode) override;
+	StarPlanner(const Graph<T>& graph);
+	std::vector<std::shared_ptr<Node<T>>> findPlan(const std::shared_ptr<Node<T>>& startNode, const std::shared_ptr<Node<T>>& endNode);
 
 private:
-	const Graph& graph;
-	OpenList m_OpenList;
+	const Graph<T>& graph;
+	OpenList<T> m_OpenList;
 };
 
-/*
+
 template<class T>
 StarPlanner<T>::StarPlanner(const Graph<T>& graph) : graph(graph){}
 template<class T>
 std::vector<std::shared_ptr<Node<T>>> StarPlanner<T>::findPlan(const std::shared_ptr<Node<T>>& startNode, const std::shared_ptr<Node<T>>& endNode){
 	std::vector<std::shared_ptr<Node<T>> nodes;
+	/*
 	if (startNode == endNode)
 		return nodes;
 
@@ -75,7 +76,7 @@ std::vector<std::shared_ptr<Node<T>>> StarPlanner<T>::findPlan(const std::shared
 			}
 		}
 	}
-	/*
+	
+	*/
 	return nodes;
 }
-*/
