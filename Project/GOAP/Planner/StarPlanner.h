@@ -8,17 +8,19 @@
 template<class T, class Y>
 class StarPlanner{
 public:
-	StarPlanner(const Graph<T, Y>& graph);
+	StarPlanner(Y& graph);
 	std::vector<const T*> findPlan(const T& startNode, const T& endNode);
 
 private:
-	const Graph<T, Y>& graph;
+	Graph<T, Y> graph;
 	OpenList<T> m_OpenList;
 };
 
 
 template<class T, class Y>
-StarPlanner<T, Y>::StarPlanner(const Graph<T, Y>& graph) : graph(graph){}
+StarPlanner<T, Y>::StarPlanner(Y& graph) 
+	: graph(Graph<T, Y>(graph))
+{}
 template<class T, class Y>
 std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& endNode){
 	std::vector<const T*> nodes;
@@ -26,30 +28,28 @@ std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& e
 	if (&startNode == &endNode)
 		return nodes;
 
-	auto start = std::make_shared<Node<T>>(startNode);
+	auto start = graph.getNode(startNode);
 
 	// 1. Add startnode to openlist
 	m_OpenList.add(start);
 
 	// 2. Iterate until openlist empty
-	std::shared_ptr<Node<T>> currentNode;
-	std::vector<std::shared_ptr<Node<T>>> neighborNodes;
 	while (m_OpenList.size() > 0){
-		currentNode = m_OpenList.popBest();
+		auto currentNode = m_OpenList.popBest();
 		// 3. Get the best node (F-score) from the openlist and add it to the closed list.
 		// Stop if currentNode is the endNode (plan has been found)
-		if (&currentNode->getObject() == &endNode){
+		if (&currentNode.getObject() == &endNode){
 			// Traverse the tree until end (start)
-			std::weak_ptr<Node<T>> parentNode = currentNode;
-			while (!parentNode.expired()){
-				nodes.insert(nodes.begin(), &parentNode.lock()->getObject());
-				parentNode = parentNode.lock()->getParent();
+			const Node<T>* parentNode = &currentNode;
+			while (parentNode != nullptr){
+				nodes.insert(nodes.begin(), &parentNode->getObject());
+				parentNode = parentNode->getParent();
 			}
 			break;
 		}
 
 		// 4. Get & iterate all adjacent nodes
-		neighborNodes = graph.getNeighbors(currentNode->getObject());
+		auto neighborNodes = graph.getNeighbors(currentNode.getObject());
 		for (auto neighborNode : neighborNodes){
 			State nodeState = neighborNode->getState();
 			// 5. If it's in the closed list, ignore it
@@ -57,7 +57,7 @@ std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& e
 				continue;
 
 			// 6. Calculate new G- & H-costs
-			float costSoFar = currentNode->getCostSoFar() + neighborNode->getCost();
+			float costSoFar = currentNode.getCostSoFar() + neighborNode->getCost();
 			float heuristicCost = graph.calculateHeuristicCost(*neighborNode, endNode);
 			float estimatedTotalCost = costSoFar + heuristicCost;
 
@@ -66,14 +66,14 @@ std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& e
 				neighborNode->setParent(currentNode);
 				neighborNode->setCostSoFar(costSoFar);
 				neighborNode->setHeuristicCost(heuristicCost);
-				m_OpenList.add(neighborNode);
+				m_OpenList.add(*neighborNode);
 			}
 			// 7.2. If it's already in the openlist, check if new G- & H-costs are better. If so update and re-add it.
 			else if (nodeState == State::Open && neighborNode->getEstimatedTotalCost() > estimatedTotalCost){
 				neighborNode->setParent(currentNode);
 				neighborNode->setCostSoFar(costSoFar);
 				neighborNode->setHeuristicCost(heuristicCost);
-				m_OpenList.add(neighborNode);
+				m_OpenList.add(*neighborNode);
 			}
 		}
 	}

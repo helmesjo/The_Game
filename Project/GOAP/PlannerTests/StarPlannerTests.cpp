@@ -28,8 +28,9 @@ public:
 TEST(StarPlanner, FindPlan_PassSameNode_ReturnsEmptyPlan)
 {
 	FakeGraph graph;
+	FakeObject object;
 	StarPlanner<FakeObject, FakeGraph> planner(graph);
-	auto node = make_shared<Node<FakeObject>>();
+	auto node = make_shared<Node<FakeObject>>(object);
 
 	auto plan = planner.findPlan(node->getObject(), node->getObject());
 
@@ -38,9 +39,11 @@ TEST(StarPlanner, FindPlan_PassSameNode_ReturnsEmptyPlan)
 TEST(StarPlanner, FindPlan_PassTwoAdjacentNodes_ReturnsSizeTwo){
 	// Arrange
 	FakeGraph graph;
+	FakeObject object1;
+	FakeObject object2;
 	StarPlanner<FakeObject, FakeGraph> planner(graph);
-	auto startNode = make_shared<Node<FakeObject>>();
-	auto adjacentNode = make_shared<Node<FakeObject>>();
+	auto startNode = make_shared<Node<FakeObject>>(object1);
+	auto adjacentNode = make_shared<Node<FakeObject>>(object2);
 	vector<const FakeObject*> adjacentNodes{ &adjacentNode->getObject() };
 	ON_CALL(graph, getNeighbors(Ref(startNode->getObject()))).WillByDefault(Return(adjacentNodes));
 	// Act

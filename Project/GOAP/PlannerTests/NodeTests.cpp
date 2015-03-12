@@ -9,7 +9,8 @@ using namespace std;
 class FakeObject{};
 
 TEST(Node, SetAllCosts_ValidValues_ReturnsCorrectEstimatedTotalValue){
-	auto node = make_shared<Node<FakeObject>>();
+	FakeObject object;
+	auto node = make_shared<Node<FakeObject>>(object);
 
 	node->setCostSoFar(10);
 	node->setHeuristicCost(5);

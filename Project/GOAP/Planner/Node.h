@@ -12,13 +12,12 @@ template<class T>
 class Node final{
 public:
 
-	Node();
 	Node(const T& object);
 	~Node();
 
 	const T& getObject() const;
-	void setParent(const std::weak_ptr<Node<T>>& parentNode);
-	const std::weak_ptr<Node<T>> getParent() const;
+	void setParent(Node<T>& parentNode);
+	const Node<T>* getParent() const;
 	void setCost(const float cost);
 	float getCost() const;
 	void setCostSoFar(const float cost);
@@ -31,17 +30,14 @@ public:
 	
 private:
 
-	T m_Object;
-	std::weak_ptr<Node<T>>	m_Parent;
+	const T& m_Object;
+	Node<T>* m_Parent;
 	float m_Cost = 1.0f;
 	float m_CostSoFar = 0.0f;			// G 
 	float m_HeuristicCost = 0.0f;		// H
 	State m_State = State::None;
 };
 
-template<class T>
-Node<T>::Node()
-	:m_Object(T()){}
 template<class T>
 Node<T>::Node(const T& object)
 	:m_Object(object)
@@ -53,11 +49,11 @@ const T& Node<T>::getObject() const{
 	return m_Object;
 }
 template<class T>
-void Node<T>::setParent(const std::weak_ptr<Node<T>>& parentNode){
-	m_Parent = parentNode;
+void Node<T>::setParent(Node<T>& parentNode){
+	m_Parent = &parentNode;
 }
 template<class T>
-const std::weak_ptr<Node<T>> Node<T>::getParent() const{
+const Node<T>* Node<T>::getParent() const{
 	return m_Parent;
 }
 template<class T>
