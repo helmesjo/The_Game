@@ -21,7 +21,6 @@ private:
 
 template<class T>
 void OpenList<T>::add(const std::shared_ptr<Node<T>>& node){
-	/*
 	if (std::find(m_Nodes.begin(), m_Nodes.end(), node) != m_Nodes.end()){
 		auto it = std::remove(m_Nodes.begin(), m_Nodes.end(), node);
 		m_Nodes.erase(it, m_Nodes.end());
@@ -36,27 +35,22 @@ void OpenList<T>::add(const std::shared_ptr<Node<T>>& node){
 
 	m_Nodes.insert(m_Nodes.begin() + index, node);
 	node->setState(State::Open);
-	*/
 }
 template<class T>
 std::shared_ptr<Node<T>> OpenList<T>::popBest(){
-	/*
 	if (size() == 0)
 		throw std::out_of_range("OpenList is empty!");
 
 	auto node = m_Nodes.back();
-	node->setState(Node::State::Closed);
+	node->setState(State::Closed);
 	m_Nodes.pop_back();
 	return node;
-	*/
-	return nullptr;
 }
 template<class T>
 const int OpenList<T>::size() const{
-	//return m_Nodes.size();
-	return 0;
+	return m_Nodes.size();
 }
 template<class T>
 void OpenList<T>::clear(){
-	//m_Nodes.clear();
+	m_Nodes.clear();
 }

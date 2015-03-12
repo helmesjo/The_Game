@@ -10,17 +10,19 @@ using namespace ::testing;
 
 //class NodeMock : public Node{};
 
+class FakeObject{};
+
 TEST(OpenList, Add_AddOneNode_ReturnsSizeOne){
-	OpenList<int> openList;
-	auto node = make_shared<Node<int>>();
+	OpenList<FakeObject> openList;
+	auto node = make_shared<Node<FakeObject>>();
 
 	openList.add(node);
 
 	ASSERT_EQ(openList.size(), 1);
 }
 TEST(OpenList, Add_AddOneNode_NodeChangesStateToOpen){
-	OpenList<int> openList;
-	auto node = make_shared<Node<int>>();
+	OpenList<FakeObject> openList;
+	auto node = make_shared<Node<FakeObject>>();
 
 	openList.add(node);
 
@@ -32,10 +34,10 @@ TEST(OpenList, Add_AddOneNode_NodeChangesStateToOpen){
 }
 TEST(OpenList, Add_AddThreeNodes_ReturnsNodeWithLowestFCost){
 	// Arrange
-	OpenList<int> openList;
-	auto node1 = make_shared<Node<int>>();
-	auto node2 = make_shared<Node<int>>();
-	auto node3 = make_shared<Node<int>>();
+	OpenList<FakeObject> openList;
+	auto node1 = make_shared<Node<FakeObject>>();
+	auto node2 = make_shared<Node<FakeObject>>();
+	auto node3 = make_shared<Node<FakeObject>>();
 	node1->setCostSoFar(8);
 	node2->setCostSoFar(5);
 	node3->setCostSoFar(10);
@@ -48,8 +50,8 @@ TEST(OpenList, Add_AddThreeNodes_ReturnsNodeWithLowestFCost){
 	ASSERT_TRUE(bestNode == node2);
 }
 TEST(OpenList, Add_AddSameNodeTwice_ReturnsSizeOne){
-	OpenList<int> openList;
-	auto node = make_shared<Node<int>>();
+	OpenList<FakeObject> openList;
+	auto node = make_shared<Node<FakeObject>>();
 
 	openList.add(node);
 	openList.add(node);
@@ -58,9 +60,9 @@ TEST(OpenList, Add_AddSameNodeTwice_ReturnsSizeOne){
 }
 TEST(OpenList, Add_ReaddNodeWithBetterFScore_ReturnsNodeWithBestF){
 	// Arrange
-	OpenList<int> openList;
-	auto node1 = make_shared<Node<int>>();
-	auto node2 = make_shared<Node<int>>();
+	OpenList<FakeObject> openList;
+	auto node1 = make_shared<Node<FakeObject>>();
+	auto node2 = make_shared<Node<FakeObject>>();
 	node1->setCostSoFar(8);
 	node2->setCostSoFar(5);
 	openList.add(node1);
@@ -72,16 +74,16 @@ TEST(OpenList, Add_ReaddNodeWithBetterFScore_ReturnsNodeWithBestF){
 	ASSERT_TRUE(openList.popBest() == node1);
 }
 TEST(OpenList, PopBest_EmptyList_ThrowsException){
-	OpenList<int> openList;
+	OpenList<FakeObject> openList;
 
 	ASSERT_EQ(openList.size(), 0);
 	EXPECT_THROW(openList.popBest(), std::out_of_range);
 }
 TEST(OpenList, Clear_AddNodesAndClear_ReturnsSizeZero){
 	// Arrange
-	OpenList<int> openList;
-	auto node1 = make_shared<Node<int>>();
-	auto node2 = make_shared<Node<int>>();
+	OpenList<FakeObject> openList;
+	auto node1 = make_shared<Node<FakeObject>>();
+	auto node2 = make_shared<Node<FakeObject>>();
 	openList.add(node1);
 	openList.add(node2);
 	// Act
