@@ -14,26 +14,26 @@ struct IGraph{
 	virtual float calculateHeuristicCost(const T& fromNode, const T& toNode) const = 0;
 };
 
-template<class T>
+template<class T, class Y>
 class Graph final{
 public:
-	Graph(const IGraph<T>& graphable);
+	Graph(const Y& graphable);
 	~Graph();
 
 	std::vector<Node<T>*> getNeighbors(const Node<T>& node) const;
 	float calculateHeuristicCost(const Node<T>& fromNode, const Node<T>& toNode) const;
 
 private:
-	const IGraph<T>& m_Graphable;
+	const Y& m_Graphable;
 	std::unordered_map<const T*, std::unique_ptr<Node<T>>> m_Nodes;
 };
 
-template<class T>
-Graph<T>::Graph(const IGraph<T>& graphable):m_Graphable(graphable){}
-template<class T>
-Graph<T>::~Graph(){}
-template<class T>
-std::vector<Node<T>*> Graph<T>::getNeighbors(const Node<T>& node) const{
+template<class T, class Y>
+Graph<T, Y>::Graph(const Y& graphable):m_Graphable(graphable){}
+template<class T, class Y>
+Graph<T, Y>::~Graph(){}
+template<class T, class Y>
+std::vector<Node<T>*> Graph<T, Y>::getNeighbors(const Node<T>& node) const{
 	/*
 	auto tNeighbors = m_Graphable->getNeighbors(node.getObject());
 
@@ -49,7 +49,7 @@ std::vector<Node<T>*> Graph<T>::getNeighbors(const Node<T>& node) const{
 	*/
 	return std::vector<Node<T>>();
 }
-template<class T>
-float Graph<T>::calculateHeuristicCost(const Node<T>& fromNode, const Node<T>& toNode) const{
+template<class T, class Y>
+float Graph<T, Y>::calculateHeuristicCost(const Node<T>& fromNode, const Node<T>& toNode) const{
 	return 0.0f;
 }
