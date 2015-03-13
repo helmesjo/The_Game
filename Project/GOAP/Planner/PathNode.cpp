@@ -2,7 +2,7 @@
 
 PathNode::PathNode(const int x, const int y)
 	: m_X(x),
-	m_Y(y)
+	  m_Y(y)
 {}
 
 int PathNode::getX() const{

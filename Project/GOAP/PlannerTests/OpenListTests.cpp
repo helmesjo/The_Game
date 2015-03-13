@@ -7,6 +7,7 @@
 
 using namespace std;
 using namespace ::testing;
+using namespace Planner;
 
 //class NodeMock : public Node{};
 

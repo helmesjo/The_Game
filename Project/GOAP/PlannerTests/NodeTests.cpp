@@ -5,6 +5,7 @@
 #include "Node.h"
 
 using namespace std;
+using namespace Planner;
 
 class FakeObject{};
 

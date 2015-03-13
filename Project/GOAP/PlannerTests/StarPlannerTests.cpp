@@ -11,12 +11,7 @@
 
 using namespace std;
 using namespace ::testing;
-
-/*
-class StarPlannerTest : public ::testing::Test{
-
-};
-*/
+using namespace Planner;
 
 class FakeObject{};
 class FakeGraph{
@@ -50,20 +45,4 @@ TEST(StarPlanner, FindPlan_PassTwoAdjacentNodes_ReturnsSizeTwo){
 	auto plan = planner.findPlan(startNode->getObject(), adjacentNode->getObject());
 	// Assert
 	ASSERT_EQ(plan.size(), 2);
-}
-
-TEST(StarPlanner, FindPlan_PassMultiplePathNodes_ReturnsCorrectPlan){
-	auto startNode = make_shared<PathNode>(0, 0);
-	auto node1 = make_shared<PathNode>(1, 0);
-	auto node2 = make_shared<PathNode>(2, 0);
-	auto node3 = make_shared<PathNode>(3, 0);
-	auto node4 = make_shared<PathNode>(3, 1);
-	auto node5 = make_shared<PathNode>(3, 2);
-	auto endNode = make_shared<PathNode>(3, 3);
-	PathGraph pathGraph({ startNode, node1, node2, node3, node4, node5, endNode });
-	StarPlanner<PathNode, PathGraph> planner(pathGraph);
-
-	auto nodes = planner.findPlan(*startNode, *endNode);
-
-	ASSERT_EQ(nodes.size(), 7);
 }
