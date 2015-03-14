@@ -27,7 +27,7 @@ namespace Planner{
 	std::vector<const T*> StarPlanner<T, Y>::findPlan(const T& startNode, const T& endNode){
 		std::vector<const T*> nodes;
 
-		if (&startNode == &endNode)
+		if (graph.isPlanDone(startNode, endNode))
 			return nodes;
 
 		auto start = graph.getNode(startNode);
@@ -58,7 +58,7 @@ namespace Planner{
 				if (nodeState == State::Closed)
 					continue;
 
-				// 6. Calculate new G- & H-costs
+				// 6. Calculate new G-, H- & F-costs
 				float costSoFar = currentNode.getCostSoFar() + neighborNode->getCost();
 				float heuristicCost = graph.calculateHeuristicCost(*neighborNode, endNode);
 				float estimatedTotalCost = costSoFar + heuristicCost;
