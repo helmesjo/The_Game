@@ -1,6 +1,8 @@
 #include "gmock\gmock.h"
 #include <vector>
 #include <memory>
+#include <string>
+#include <iostream>
 
 #include "StarPlanner.h"
 #include "PathNode.h"
@@ -47,7 +49,7 @@ TEST(PathGraph, CalculateHeuristicCost_PassTwoValidNodes_ReturnsEstimatedDistanc
 
 	ASSERT_EQ(heuristicCost, 5);
 }
-TEST(PathGraph, FindPlan_PassMultiplePathNodes_ReturnsCorrectPlan){
+TEST(PathGraph, FindPlan_PassSimpleRoute_ReturnsCorrectPlan){
 	auto startNode = make_shared<PathNode>(0, 0);
 	auto node1 = make_shared<PathNode>(1, 0);
 	auto node2 = make_shared<PathNode>(2, 0);
@@ -68,4 +70,50 @@ TEST(PathGraph, FindPlan_PassMultiplePathNodes_ReturnsCorrectPlan){
 	ASSERT_TRUE(nodes[4] == node4.get());
 	ASSERT_TRUE(nodes[5] == node5.get());
 	ASSERT_TRUE(nodes[6] == endNode.get());
+}
+TEST(PathGraph, FindPlan_PassComplexRoute_ReturnsCorrectPlan){
+	// Arrange
+	const std::string map[10][10] = 
+	{
+		" ", " ", "S", " ", "X", "E", " ", " ", " ", " ",
+		" ", "X", "X", "X", "X", " ", " ", " ", " ", " ",
+		" ", "X", " ", " ", "X", " ", "X", "X", "X", " ",
+		" ", "X", " ", " ", " ", " ", "X", " ", " ", " ",
+		" ", "X", "X", "X", "X", "X", "X", " ", "X", " ",
+		" ", "X", " ", " ", "X", " ", "X", " ", "X", "X",
+		" ", " ", " ", "X", "X", " ", "X", " ", " ", " ",
+		" ", "X", " ", "X", " ", " ", "X", "X", " ", " ",
+		" ", "X", " ", " ", " ", " ", " ", "X", "X", " ",
+		" ", " ", " ", "X", " ", "X", " ", " ", " ", " ",
+	};
+
+	std::shared_ptr<PathNode> startNode = nullptr;
+	std::shared_ptr<PathNode> endNode = nullptr;
+	std::vector<std::shared_ptr<PathNode>> nodes;
+
+	for (int column = 0; column < 10; ++column){
+		for (int row = 0; row < 10; ++row){
+			if (map[row][column] == "S")
+				startNode = std::make_shared<PathNode>(column, row);
+			else if (map[row][column] == "E")
+				endNode = std::make_shared<PathNode>(column, row);
+			else if (map[row][column] != "X")
+				nodes.push_back(std::make_shared<PathNode>(column, row));
+		}
+	}
+	nodes.insert(nodes.begin(), startNode);
+	nodes.push_back(endNode);
+	PathGraph graph(nodes);
+	StarPlanner<PathNode, PathGraph> planner(graph);
+	// Act
+	auto plan = planner.findPlan(*startNode, *endNode);
+
+	// Assert
+	for (int column = 0; column < 10; ++column){
+		std::cout << " ";
+		for (int row = 0; row < 10; ++row){
+			std::cout << " ";
+			std::cout << std::endl;
+		}
+	}
 }
