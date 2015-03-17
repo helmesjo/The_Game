@@ -41,12 +41,7 @@ namespace Planner{
 			// 3. Get the best node (F-score) from the openlist and add it to the closed list.
 			// Stop if currentNode is the endNode (plan has been found)
 			if (graph.isPlanDone(currentNode.getObject(), endNode)){
-				// Traverse the tree until end (start, reverse order)
-				Node<T>* parentNode = &currentNode;
-				while (parentNode != nullptr){
-					nodes.insert(nodes.begin(), &parentNode->getObject());
-					parentNode = parentNode->getParent();
-				}
+				nodes = graph.buildPlan(currentNode);
 				break;
 			}
 

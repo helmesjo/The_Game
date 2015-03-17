@@ -25,6 +25,7 @@ namespace Planner{
 		std::vector<Node<T>*> getNeighbors(const Node<T>& node);
 		float calculateHeuristicCost(const Node<T>& fromNode, const Node<T>& toNode) const;
 		bool isPlanDone(const T& obj1, const T& obj2) const;
+		std::vector<const T*> buildPlan(const Node<T>& endNode) const;
 
 	private:
 		const Y& m_Graphable;
@@ -74,6 +75,19 @@ namespace Planner{
 	template<class T, class Y>
 	bool Graph<T, Y>::isPlanDone(const T& obj1, const T& obj2) const{
 		return &obj1 == &obj2;
+	}
+
+	template<class T, class Y>
+	std::vector<const T*> Graph<T, Y>::buildPlan(const Node<T>& endNode) const{
+		std::vector<const T*> nodes;
+		// Traverse the tree until end (start, reverse order)
+		const Node<T>* parentNode = &endNode;
+		while (parentNode != nullptr){
+			nodes.insert(nodes.begin(), &parentNode->getObject());
+			parentNode = parentNode->getParent();
+		}
+
+		return nodes;
 	}
 
 }
