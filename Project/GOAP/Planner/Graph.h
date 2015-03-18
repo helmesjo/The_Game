@@ -69,7 +69,7 @@ namespace Planner{
 
 	template<class T, class Y>
 	float Graph<T, Y>::calculateHeuristicCost(const Node<T>& fromNode, const Node<T>& toNode) const{
-		return m_Graphable.calculateHeuristicCost(fromNode.getObject(), toNode.getObject());
+		return 0.0f;// m_Graphable.calculateHeuristicCost(fromNode.getObject(), toNode.getObject());
 	}
 
 	template<class T, class Y>
