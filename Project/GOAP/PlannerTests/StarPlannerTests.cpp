@@ -33,14 +33,15 @@ TEST(StarPlanner, FindPlan_PassSameNode_ReturnsEmptyPlan)
 }
 TEST(StarPlanner, FindPlan_PassTwoAdjacentNodes_ReturnsSizeTwo){
 	// Arrange
-	FakeGraph graph;
+	FakeGraph fakeGraph;
 	FakeObject object1;
 	FakeObject object2;
-	StarPlanner<FakeObject, FakeGraph> planner(graph);
+	StarPlanner<FakeObject, FakeGraph> planner(fakeGraph);
 	auto startNode = make_shared<Node<FakeObject>>(object1);
 	auto adjacentNode = make_shared<Node<FakeObject>>(object2);
 	vector<const FakeObject*> adjacentNodes{ &adjacentNode->getObject() };
-	ON_CALL(graph, getNeighbors(Ref(startNode->getObject()))).WillByDefault(Return(adjacentNodes));
+	ON_CALL(fakeGraph, calculateHeuristicCost(_, _)).WillByDefault(Return(5.0f));
+	ON_CALL(fakeGraph, getNeighbors(Ref(object1))).WillByDefault(Return(adjacentNodes));
 	// Act
 	auto plan = planner.findPlan(startNode->getObject(), adjacentNode->getObject());
 	// Assert
