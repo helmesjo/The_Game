@@ -107,7 +107,7 @@ TEST(PathGraph, FindPlan_PassComplexRoute_ReturnsCorrectPlan){
 	StarPlanner<PathNode, PathGraph> planner(graph);
 	// Act
 	auto plan = planner.findPlan(*startNode, *endNode);
-
+	/*
 	// Assert
 	for (int column = 0; column < 10; ++column){
 		std::cout << " ";
@@ -116,4 +116,6 @@ TEST(PathGraph, FindPlan_PassComplexRoute_ReturnsCorrectPlan){
 			std::cout << std::endl;
 		}
 	}
+	*/
+	ASSERT_EQ(plan.size(), 38);
 }
