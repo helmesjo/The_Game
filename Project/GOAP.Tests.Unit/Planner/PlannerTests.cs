@@ -10,11 +10,13 @@ namespace GOAP.Tests.Unit.Planner
 	{
 
 		[Test]
-		public void FindPlan_PassValidStartAndEndNode_ValidPlanContainsBothNodes()
+		public void FindPlan_ValidStartAndEndNode_PlanContainsBothNodes()
 		{
 			var startNode = PlannerUtil.CreateFakeNode();
 			var endNode = PlannerUtil.CreateFakeNode();
 			var graph = PlannerUtil.CreateFakeGraph(startNode, endNode);
+			graph.GetNeighbors(startNode).Returns(new INode[] { endNode });
+			graph.IsDone(endNode, endNode).Returns(true);
 			var planner = CreatePlanner(graph);
 
 			var plan = planner.FindPlan(startNode, endNode);
@@ -28,6 +30,7 @@ namespace GOAP.Tests.Unit.Planner
 		{
 			var startNode = PlannerUtil.CreateFakeNode();
 			var graph = PlannerUtil.CreateFakeGraph(startNode);
+			graph.IsDone(startNode, startNode).Returns(true);
 			var planner = CreatePlanner(graph);
 
 			var plan = planner.FindPlan(startNode, startNode);
@@ -47,6 +50,27 @@ namespace GOAP.Tests.Unit.Planner
 			var plan = planner.FindPlan(startNode, endNode);
 
 			Assert.IsTrue(plan.Length == 0);
+		}
+
+		[Test]
+		public void FindPlan_ThreeAdjacentNodes_ReturnsCompletePlan()
+		{
+			var startNode = PlannerUtil.CreateFakeNode();
+			var middleNode = PlannerUtil.CreateFakeNode();
+			var endNode = PlannerUtil.CreateFakeNode();
+			var graph = PlannerUtil.CreateFakeGraph();
+			graph.GetNeighbors(startNode).Returns(new INode[] { middleNode });
+			graph.GetNeighbors(middleNode).Returns(new INode[] { endNode });
+			graph.IsDone(endNode, endNode).Returns(true);
+			var planner = CreatePlanner(graph);
+
+			var plan = planner.FindPlan(startNode, endNode);
+
+			int expectedPlanLength = 3;
+			Assert.AreEqual(expectedPlanLength, plan.Length);
+			Assert.AreSame(startNode, plan[0]);
+			Assert.AreSame(middleNode, plan[1]);
+			Assert.AreSame(endNode, plan[2]);
 		}
 
 		private static IPlanner CreatePlanner(IGraph graph)
