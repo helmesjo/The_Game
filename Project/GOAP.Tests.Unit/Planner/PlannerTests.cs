@@ -73,6 +73,22 @@ namespace GOAP.Tests.Unit.Planner
 			Assert.AreSame(endNode, plan[2]);
 		}
 
+		[Test]
+		public void FindPlan_MultiplePossiblePlans_ReturnsBestPlan()
+		{
+			INode startNode = null;
+			INode endNode = null;
+			INode[] bestPlan = null;
+			var graph = PlannerUtil.CreateGraphWithMultiplePlans(out startNode, out endNode, out bestPlan);
+			var planner = CreatePlanner(graph);
+
+			var plan = planner.FindPlan(startNode, endNode);
+
+			Assert.AreEqual(bestPlan.Length, plan.Length);
+			for (int i = 0; i < bestPlan.Length; ++i)
+				Assert.AreSame(bestPlan[i], plan[i]);
+		}
+
 		private static IPlanner CreatePlanner(IGraph graph)
 		{
 			return new AStarPlanner(graph);

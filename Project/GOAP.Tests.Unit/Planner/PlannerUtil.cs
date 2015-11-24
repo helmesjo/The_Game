@@ -7,6 +7,51 @@ namespace GOAP.Tests.Unit.Planner
 {
 	static class PlannerUtil
 	{
+
+		public static IPlannerList CreatePlannerList()
+		{
+			var plannerList = Substitute.For<IPlannerList>();
+			return plannerList;
+		}
+
+		public static IGraph CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out INode[] bestPlan)
+		{
+			startNode = CreateFakeNode();
+			endNode = CreateFakeNode();
+			var node11 = CreateFakeNode();
+			var node12 = CreateFakeNode();
+			var node21 = CreateFakeNode();
+
+			var graph = CreateFakeGraph(startNode, node11, node12, endNode);
+
+			graph.GetNeighbors(startNode).Returns(new INode[] { node11, node12 });
+			graph.GetNeighbors(node11).Returns(new INode[] { startNode, node12, node21 });
+			graph.GetNeighbors(node12).Returns(new INode[] { startNode, node11, node21 });
+			graph.GetNeighbors(node21).Returns(new INode[] { node11, node12, endNode });
+
+			const float startToNode11Cost = 5f;
+			const float startToNode12Cost = 11f;
+			const float node11ToNode12Cost = 5f;
+			const float node11ToNode21Cost = 20f;
+			const float node12ToNode11Cost = 10f;
+			const float node12ToNode21Cost = 10f;
+			const float node21ToEndCost = 10f;
+			graph.CalculateCost(startNode, node11).Returns(startToNode11Cost);
+			graph.CalculateCost(startNode, node12).Returns(startToNode12Cost);
+			graph.CalculateCost(node11, node12).Returns(node11ToNode12Cost);
+			graph.CalculateCost(node11, node21).Returns(node11ToNode21Cost);
+			graph.CalculateCost(node12, node11).Returns(node12ToNode11Cost);
+			graph.CalculateCost(node12, node21).Returns(node12ToNode21Cost);
+			graph.CalculateCost(node21, endNode).Returns(node21ToEndCost);
+			graph.CalculateEstimatedCost(Arg.Any<INode>(), Arg.Any<INode>()).Returns(5f);
+
+			graph.IsDone(endNode, endNode).Returns(true);
+
+			bestPlan = new INode[] { startNode, node11, node12, node21, endNode };
+
+			return graph;
+		}
+
 		public static IGraph CreateFakeGraph(params INode[] nodes)
 		{
 			var graph = Substitute.For<IGraph>();
@@ -39,7 +84,8 @@ namespace GOAP.Tests.Unit.Planner
 
 		public static INode CreateFakeNode()
 		{
-			return Substitute.For<INode>();
+			var node = Substitute.For<INode>();
+            return node;
 		}
 	}
 }

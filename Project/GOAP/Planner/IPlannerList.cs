@@ -4,9 +4,10 @@ namespace GOAP.Planner
 {
 	public interface IPlannerList
 	{
-		void Add(INode node);
+		void AddOrUpdate(INode node);
 		bool HasNext();
 		INode PopNext();
 		bool HasNode(INode node);
+		void Clear();
 	}
 }

@@ -20,11 +20,18 @@ namespace GOAP.Planner
 			}
 		}
 
-		IntervalHeap<INode> nodes = new IntervalHeap<INode>(new NodeComparer());
+		IPriorityQueue<INode> nodes = new IntervalHeap<INode>(new NodeComparer());
 
-		public void Add(INode node)
+		public void AddOrUpdate(INode node)
 		{
-			nodes.Add(node);
+			if (!HasNode(node))
+			{
+				IPriorityQueueHandle<INode> handle = null;
+				nodes.Add(ref handle, node);
+				node.QueueHandle = handle;
+			}
+			else
+				nodes.Replace(node.QueueHandle, node);
         }
 
 		public bool HasNext()
@@ -39,7 +46,13 @@ namespace GOAP.Planner
 
 		public bool HasNode(INode node)
 		{
-			return nodes.Exists(n => n.Equals(node));
+			return nodes.Find(node.QueueHandle, out node);
 		}
+
+		public void Clear()
+		{
+			while (nodes.Count > 0)
+				nodes.DeleteMin();
+        }
 	}
 }

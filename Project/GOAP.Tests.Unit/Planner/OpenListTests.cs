@@ -16,22 +16,56 @@ namespace GOAP.Tests.Unit.Planner
 			var plannerList = CreateOpenList();
 			var node = PlannerUtil.CreateFakeNode();
 
-			plannerList.Add(node);
-			bool hasNext = plannerList.HasNext();
+			plannerList.AddOrUpdate(node);
 
+			bool hasNext = plannerList.HasNext();
 			Assert.IsTrue(hasNext);
 		}
 
 		[Test]
-		public void PopNext_AddTwoNodes_ReturnsNodeWithLowestFCost()
+		public void PopNext_AddTwoNodesAndSetValueBeforeAdd_ReturnsNodeWithLowestFCost()
 		{
 			var plannerList = CreateOpenList();
 			var node1 = PlannerUtil.CreateFakeNode();
 			var node2 = PlannerUtil.CreateFakeNode();
 			node1.EstimatedTotalCost.Returns(10f);
 			node2.EstimatedTotalCost.Returns(5f);
-			plannerList.Add(node1);
-			plannerList.Add(node2);
+			plannerList.AddOrUpdate(node1);
+			plannerList.AddOrUpdate(node2);
+
+			var nextNode = plannerList.PopNext();
+
+			Assert.AreSame(nextNode, node2);
+		}
+
+		[Test]
+		public void PopNext_AddTwoNodesAndSetValueAfterAdd_ReturnsNodeFirstAdded()
+		{
+			var plannerList = CreateOpenList();
+			var node1 = PlannerUtil.CreateFakeNode();
+			var node2 = PlannerUtil.CreateFakeNode();
+			plannerList.AddOrUpdate(node1);
+			plannerList.AddOrUpdate(node2);
+			node1.EstimatedTotalCost.Returns(10f);
+			node2.EstimatedTotalCost.Returns(5f);
+
+			var nextNode = plannerList.PopNext();
+
+			Assert.AreSame(nextNode, node1);
+		}
+
+		[Test]
+		public void PopNext_AddTwoNodesAndSetValueAfterAddThenUpdate_ReturnsNodeWithLowestFCost()
+		{
+			var plannerList = CreateOpenList();
+			var node1 = PlannerUtil.CreateFakeNode();
+			var node2 = PlannerUtil.CreateFakeNode();
+			plannerList.AddOrUpdate(node1);
+			plannerList.AddOrUpdate(node2);
+			node1.EstimatedTotalCost.Returns(10f);
+			node2.EstimatedTotalCost.Returns(5f);
+			plannerList.AddOrUpdate(node1);
+			plannerList.AddOrUpdate(node2);
 
 			var nextNode = plannerList.PopNext();
 
@@ -43,7 +77,7 @@ namespace GOAP.Tests.Unit.Planner
 		{
 			var plannerList = CreateOpenList();
 			var node = PlannerUtil.CreateFakeNode();
-			plannerList.Add(node);
+			plannerList.AddOrUpdate(node);
 
 			bool hasNext = plannerList.HasNode(node);
 
@@ -55,12 +89,25 @@ namespace GOAP.Tests.Unit.Planner
 		{
 			var plannerList = CreateOpenList();
 			var node = PlannerUtil.CreateFakeNode();
-			plannerList.Add(node);
+			plannerList.AddOrUpdate(node);
 			plannerList.PopNext();
 
 			bool hasNext = plannerList.HasNode(node);
 
 			Assert.IsFalse(hasNext);
+		}
+
+		[Test]
+		public void Clear_AddNode_RemovesNode()
+		{
+			var plannerList = CreateOpenList();
+			var node = PlannerUtil.CreateFakeNode();
+			plannerList.AddOrUpdate(node);
+
+			plannerList.Clear();
+
+			bool hasNode = plannerList.HasNode(node);
+			Assert.IsFalse(hasNode);
 		}
 
 		private static IPlannerList CreateOpenList()

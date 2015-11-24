@@ -14,42 +14,53 @@ namespace GOAP.Planner
 
 		public INode[] FindPlan(INode startNode, INode endNode)
 		{
-			startNode.Parent = null;
-            startNode.CostSoFar = 0f;
-			startNode.EstimatedTotalCost = graph.CalculateEstimatedCost(startNode, endNode);
+			var plan = new INode[] { };
+            visitedNodes.Clear();
+			ResetNode(ref startNode);
+			startNode.EstimatedTotalCost = float.MaxValue;
 
-			visitedNodes.Add(startNode);
-
+			visitedNodes.AddOrUpdate(startNode);
 			while (visitedNodes.HasNext())
 			{
 				var currentNode = visitedNodes.PopNext();
 				currentNode.IsClosed = true;
 
 				if (graph.IsDone(currentNode, endNode))
-					return graph.BuildPlan(currentNode);
+				{
+					plan = graph.BuildPlan(currentNode);
+					break;
+				}
 
 				var neighbors = graph.GetNeighbors(currentNode);
 
-				foreach(var neighbor in neighbors)
+				foreach (var neighbor in neighbors)
 				{
 					if (neighbor.IsClosed)
 						continue;
 
 					float costSoFar = currentNode.CostSoFar + graph.CalculateCost(currentNode, neighbor);
 
-					if (!visitedNodes.HasNode(neighbor))
-						visitedNodes.Add(neighbor);
-					else if (costSoFar >= neighbor.CostSoFar)
-						continue;
-
-					neighbor.Parent = currentNode;
-					neighbor.CostSoFar = costSoFar;
-					neighbor.EstimatedTotalCost = costSoFar + graph.CalculateEstimatedCost(neighbor, endNode);
-
+					bool hasNotBeenVisited = !visitedNodes.HasNode(neighbor);
+					bool isBetterPlan = costSoFar < neighbor.CostSoFar;
+                    if (hasNotBeenVisited || isBetterPlan)
+					{
+						neighbor.Parent = currentNode;
+						neighbor.CostSoFar = costSoFar;
+						neighbor.EstimatedTotalCost = costSoFar + graph.CalculateEstimatedCost(neighbor, endNode);
+						visitedNodes.AddOrUpdate(neighbor);
+					}
 				}
 			}
-			
-			return new INode[]{};
+
+			return plan;
 		}
+
+		private static void ResetNode(ref INode startNode)
+		{
+			startNode.Parent = null;
+			startNode.CostSoFar = 0f;
+			startNode.EstimatedTotalCost = 0f;
+			startNode.IsClosed = false;
+        }
 	}
 }
