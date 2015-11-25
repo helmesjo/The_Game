@@ -2,11 +2,11 @@
 {
 	public interface IGraph
 	{
-		bool HasNode(INode start);
-		INode[] GetNeighbors(INode startNode);
-		float CalculateEstimatedCost(INode startNode, INode endNode);
+		bool HasNode(INode node);
+		INode[] GetNeighbors(INode node);
+		float CalculateEstimatedCost(INode currentNode, INode endNode);
 		bool IsDone(INode currentNode, INode endNode);
-		INode[] BuildPlan(INode currentNode);
+		INode[] BuildPlan(INode endNode);
 		float CalculateCost(INode currentNode, INode neighbor);
 	}
 }

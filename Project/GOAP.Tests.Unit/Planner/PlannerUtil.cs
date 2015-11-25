@@ -5,16 +5,16 @@ using GOAP.Planner;
 
 namespace GOAP.Tests.Unit.Planner
 {
-	static class PlannerUtil
+	internal static class PlannerUtil
 	{
 
-		public static IPlannerList CreatePlannerList()
+		internal static IPlannerList CreatePlannerList()
 		{
 			var plannerList = Substitute.For<IPlannerList>();
 			return plannerList;
 		}
 
-		public static IGraph CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out INode[] bestPlan)
+		internal static IGraph CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out INode[] bestPlan)
 		{
 			startNode = CreateFakeNode();
 			endNode = CreateFakeNode();
@@ -52,7 +52,7 @@ namespace GOAP.Tests.Unit.Planner
 			return graph;
 		}
 
-		public static IGraph CreateFakeGraph(params INode[] nodes)
+		internal static IGraph CreateFakeGraph(params INode[] nodes)
 		{
 			var graph = Substitute.For<IGraph>();
 			graph.IsDone(Arg.Any<INode>(), Arg.Any<INode>()).Returns(false);
@@ -82,7 +82,7 @@ namespace GOAP.Tests.Unit.Planner
 			return graph;
 		}
 
-		public static INode CreateFakeNode()
+		internal static INode CreateFakeNode()
 		{
 			var node = Substitute.For<INode>();
             return node;
