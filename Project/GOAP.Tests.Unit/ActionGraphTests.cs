@@ -39,13 +39,28 @@ namespace GOAP.Tests.Unit.GOAP
 		{
 			var action1 = GOAPUtil.CreateFakeAction();
 			var action2 = GOAPUtil.CreateFakeAction();
+			action2.Parent.Returns(action1);
 			var action3 = GOAPUtil.CreateFakeAction();
+			action3.Parent.Returns(action2);
 			var graph = CreateActionGraph(action1, action2, action3);
 			var expectedPlan = new INode[] { action1, action2, action3 };
 
 			var plan = graph.BuildPlan(action3);
 
 			Assert.AreEqual(expectedPlan, plan);
+		}
+
+		[Test]
+		public void CalculateCost_TwoValidActions_ReturnsCorrectCost()
+		{
+			var action1 = GOAPUtil.CreateFakeAction();
+			var action2 = GOAPUtil.CreateFakeAction();
+			var graph = CreateActionGraph();
+			const float expectedCost = 10f;
+
+			var cost = graph.CalculateCost(action1, action2);
+
+			Assert.AreEqual(expectedCost, cost);
 		}
 
 		[Test]
