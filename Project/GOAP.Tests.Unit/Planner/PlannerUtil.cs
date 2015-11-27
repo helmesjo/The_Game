@@ -18,36 +18,28 @@ namespace GOAP.Tests.Unit.Planner
 		{
 			startNode = CreateFakeNode();
 			endNode = CreateFakeNode();
-			var node11 = CreateFakeNode();
-			var node12 = CreateFakeNode();
-			var node21 = CreateFakeNode();
+			var node1 = CreateFakeNode();
+			var node2 = CreateFakeNode();
+			var node3 = CreateFakeNode();
 
-			var graph = CreateFakeGraph(startNode, node11, node12, endNode);
+			var graph = CreateFakeGraph(startNode, node2, node3, endNode);
+			//		1 - 3 - E
+			// s  <	  /
+			//		2
 
-			graph.GetNeighbors(startNode).Returns(new INode[] { node11, node12 });
-			graph.GetNeighbors(node11).Returns(new INode[] { startNode, node12, node21 });
-			graph.GetNeighbors(node12).Returns(new INode[] { startNode, node11, node21 });
-			graph.GetNeighbors(node21).Returns(new INode[] { node11, node12, endNode });
+			graph.GetNeighbors(startNode).Returns(new INode[] { node1, node2 });
+			graph.GetNeighbors(node1).Returns(new INode[] { startNode, node3 });
+			graph.GetNeighbors(node2).Returns(new INode[] { startNode, node3 });
+			graph.GetNeighbors(node3).Returns(new INode[] { node1, node2, endNode });
 
-			const float startToNode11Cost = 5f;
-			const float startToNode12Cost = 11f;
-			const float node11ToNode12Cost = 5f;
-			const float node11ToNode21Cost = 20f;
-			const float node12ToNode11Cost = 10f;
-			const float node12ToNode21Cost = 10f;
-			const float node21ToEndCost = 10f;
-			graph.CalculateCost(startNode, node11).Returns(startToNode11Cost);
-			graph.CalculateCost(startNode, node12).Returns(startToNode12Cost);
-			graph.CalculateCost(node11, node12).Returns(node11ToNode12Cost);
-			graph.CalculateCost(node11, node21).Returns(node11ToNode21Cost);
-			graph.CalculateCost(node12, node11).Returns(node12ToNode11Cost);
-			graph.CalculateCost(node12, node21).Returns(node12ToNode21Cost);
-			graph.CalculateCost(node21, endNode).Returns(node21ToEndCost);
+			node1.Cost.Returns(5f);
+			node2.Cost.Returns(10f);
+			node3.Cost.Returns(5f);
 			graph.CalculateEstimatedCost(Arg.Any<INode>(), Arg.Any<INode>()).Returns(5f);
 
 			graph.IsDone(endNode, endNode).Returns(true);
 
-			bestPlan = new INode[] { startNode, node11, node12, node21, endNode };
+			bestPlan = new INode[] { startNode, node1, node3, endNode };
 
 			return graph;
 		}

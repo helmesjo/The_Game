@@ -4,6 +4,7 @@ namespace GOAP.Planner
 {
 	public interface INode
 	{
+		float Cost { get; }
 		float CostSoFar { get; set; }
 		float EstimatedTotalCost { get; set; }
 		bool IsClosed { get; set; }

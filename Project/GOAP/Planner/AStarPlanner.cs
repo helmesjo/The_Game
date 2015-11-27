@@ -38,7 +38,7 @@ namespace GOAP.Planner
 					if (neighbor.IsClosed)
 						continue;
 
-					float costSoFar = currentNode.CostSoFar + graph.CalculateCost(currentNode, neighbor);
+					float costSoFar = currentNode.CostSoFar + currentNode.Cost;
 
 					bool hasNotBeenVisited = !visitedNodes.HasNode(neighbor);
 					bool isBetterPlan = costSoFar < neighbor.CostSoFar;

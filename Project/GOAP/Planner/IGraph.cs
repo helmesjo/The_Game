@@ -7,6 +7,5 @@
 		float CalculateEstimatedCost(INode currentNode, INode endNode);
 		bool IsDone(INode currentNode, INode endNode);
 		INode[] BuildPlan(INode endNode);
-		float CalculateCost(INode currentNode, INode neighbor);
 	}
 }

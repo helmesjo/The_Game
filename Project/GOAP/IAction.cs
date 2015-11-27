@@ -4,7 +4,7 @@ namespace GOAP
 {
 	public interface IAction : INode
 	{
-		object Precondition { get; set; }
+		IWorldState[] Precondition { get; set; }
 
 		bool SatisfiesPrecondition(object precondition);
 	}

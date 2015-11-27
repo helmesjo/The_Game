@@ -29,7 +29,7 @@ namespace GOAP
 
 		public float CalculateCost(INode action1, INode action2)
 		{
-			throw new NotImplementedException();
+			return 1f;
 		}
 
 		public float CalculateEstimatedCost(INode action1, INode action2)

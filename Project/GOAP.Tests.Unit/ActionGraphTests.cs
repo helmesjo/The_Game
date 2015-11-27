@@ -51,19 +51,6 @@ namespace GOAP.Tests.Unit.GOAP
 		}
 
 		[Test]
-		public void CalculateCost_TwoValidActions_ReturnsCorrectCost()
-		{
-			var action1 = GOAPUtil.CreateFakeAction();
-			var action2 = GOAPUtil.CreateFakeAction();
-			var graph = CreateActionGraph();
-			const float expectedCost = 10f;
-
-			var cost = graph.CalculateCost(action1, action2);
-
-			Assert.AreEqual(expectedCost, cost);
-		}
-
-		[Test]
 		public void GetNeighbors_OneActionSatisfyingPrecondition_ReturnsAction()
 		{
 			var action1 = GOAPUtil.CreateFakeAction();
@@ -86,6 +73,19 @@ namespace GOAP.Tests.Unit.GOAP
 			var neighbors = graph.GetNeighbors(action1);
 
 			Assert.IsEmpty(neighbors);
+		}
+
+		[Test]
+		public void CalculateEstimatedCost_TwoValidActions_ReturnsCost()
+		{
+			var action1 = GOAPUtil.CreateFakeAction();
+			var action2 = GOAPUtil.CreateFakeAction();
+			var actionGraph = CreateActionGraph(action1, action2);
+			const float expectedCost = 1f;
+
+			var estimatedCost = actionGraph.CalculateEstimatedCost(action1, action2);
+
+			Assert.AreEqual(expectedCost, estimatedCost);
 		}
 
 		private static IGraph CreateActionGraph(params IAction[] actions)
