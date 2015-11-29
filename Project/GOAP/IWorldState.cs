@@ -7,5 +7,6 @@ namespace GOAP
 		IWorldStateProperty[] Properties { get; }
 
 		bool IsPropertySame(IWorldStateProperty property);
+		bool doesSatisfy(IWorldState state);
 	}
 }

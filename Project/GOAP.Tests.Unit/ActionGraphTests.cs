@@ -96,7 +96,7 @@ namespace GOAP.Tests.Unit.GOAP
 		[Test]
 		public void IsDone_TwoEqualStates_ReturnsTrue()
 		{
-			string propertyKey = "IsTrue";
+			string propertyKey = "PropKey";
 			var stateProperty1 = GOAPUtil.CreateFakeStateProperty(propertyKey, false);
 			var state1 = GOAPUtil.CreateFakeWorldState(stateProperty1);
 			var state2 = GOAPUtil.CreateFakeWorldState(stateProperty1);
@@ -112,7 +112,7 @@ namespace GOAP.Tests.Unit.GOAP
 		[Test]
 		public void IsDone_TwoNoneEqualStates_ReturnsFalse()
 		{
-			string propertyKey = "IsTrue";
+			string propertyKey = "PropKey";
 			var stateProperty1 = GOAPUtil.CreateFakeStateProperty(propertyKey, false);
 			var stateProperty2 = GOAPUtil.CreateFakeStateProperty(propertyKey, true);
 			var state1 = GOAPUtil.CreateFakeWorldState(stateProperty1);

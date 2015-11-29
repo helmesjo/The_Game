@@ -30,6 +30,13 @@ namespace GOAP.Tests.Unit.GOAP
 						return true;
 				return false;
 			});
+			state.doesSatisfy(Arg.Any<IWorldState>()).Returns(info => {
+				var passedState = info.Arg<IWorldState>();
+				foreach (var prop in state.Properties)
+					if (!passedState.IsPropertySame(prop))
+						return false;
+				return true;
+			});
 			return state;
 		}
 
