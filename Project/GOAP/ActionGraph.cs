@@ -7,11 +7,11 @@ namespace GOAP
 {
 	public class ActionGraph : IGraph
 	{
-		private IAction[] actions = new IAction[0];
+		private IGOAPNode[] nodes = new IGOAPNode[0];
 
-		public ActionGraph(params IAction[] actions)
+		public ActionGraph(params IGOAPNode[] nodes)
 		{
-			this.actions = actions;
+			this.nodes = nodes;
         }
 
 		public INode[] BuildPlan(INode endNode)
@@ -27,24 +27,33 @@ namespace GOAP
 			return plan.ToArray();
         }
 
-		public float CalculateCost(INode action1, INode action2)
+		public float CalculateCost(INode node1, INode node2)
 		{
 			return 1f;
 		}
 
-		public float CalculateEstimatedCost(INode action1, INode action2)
+		public float CalculateEstimatedCost(INode node1, INode node2)
 		{
-			throw new NotImplementedException();
+			var goapNode1 = node1 as IGOAPNode;
+			var goapNode2 = node2 as IGOAPNode;
+			int counter = 0;
+			var node2State = goapNode2.State;
+			foreach (var property in goapNode1.State.Properties)
+			{
+				if (!node2State.IsPropertySame(property))
+					++counter;
+			}
+			return counter;
 		}
 
 		public INode[] GetNeighbors(INode node)
 		{
-			var action = node as IAction;
+			var action = node as IGOAPNode;
 
 			var actionsSatisfyingPrecondition = new HashSet<INode>();
 
-			foreach(var action2 in actions)
-				if (action2.SatisfiesPrecondition(action.Precondition))
+			foreach(var action2 in nodes)
+				if (action2.SatisfiesPrecondition(action.State))
 					actionsSatisfyingPrecondition.Add(action2);
 
 			return actionsSatisfyingPrecondition.ToArray();
@@ -52,12 +61,14 @@ namespace GOAP
 
 		public bool HasNode(INode node)
 		{
-			return actions.Contains(node);
+			return nodes.Contains(node);
 		}
 
 		public bool IsDone(INode currentNode, INode endNode)
 		{
-			throw new NotImplementedException();
+			var goapNode1 = currentNode as IGOAPNode;
+			var goapNode2 = endNode as IGOAPNode;
+			return goapNode1.State.doesSatisfy(goapNode2.State);
 		}
 	}
 }

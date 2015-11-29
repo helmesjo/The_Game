@@ -51,6 +51,7 @@
     <Compile Include="ActionGraph.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="IWorldState.cs" />
+    <Compile Include="IWorldStateProperty.cs" />
     <Compile Include="Planner\AStarPlanner.cs" />
     <Compile Include="Planner\IGraph.cs" />
     <Compile Include="Planner\INode.cs" />

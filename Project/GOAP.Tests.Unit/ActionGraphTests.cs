@@ -15,10 +15,10 @@ namespace GOAP.Tests.Unit.GOAP
 		[Test]
 		public void HasNode_AddNode_ReturnsTrue()
 		{
-			var action = GOAPUtil.CreateFakeAction();
-			var graph = CreateActionGraph(action);
+			var node = GOAPUtil.CreateFakeNode();
+			var graph = CreateActionGraph(node);
 
-			bool hasNode = graph.HasNode(action);
+			bool hasNode = graph.HasNode(node);
 
 			Assert.IsTrue(hasNode);
 		}
@@ -26,10 +26,10 @@ namespace GOAP.Tests.Unit.GOAP
 		[Test]
 		public void HasNode_EmptyGraph_ReturnsFalse()
 		{
-			var action = GOAPUtil.CreateFakeAction();
+			var node = GOAPUtil.CreateFakeNode();
 			var graph = CreateActionGraph();
 
-			bool hasNode = graph.HasNode(action);
+			bool hasNode = graph.HasNode(node);
 
 			Assert.IsFalse(hasNode);
 		}
@@ -37,15 +37,15 @@ namespace GOAP.Tests.Unit.GOAP
 		[Test]
 		public void BuildPlan_NestThreeNodes_ReturnsNodes()
 		{
-			var action1 = GOAPUtil.CreateFakeAction();
-			var action2 = GOAPUtil.CreateFakeAction();
-			action2.Parent.Returns(action1);
-			var action3 = GOAPUtil.CreateFakeAction();
-			action3.Parent.Returns(action2);
-			var graph = CreateActionGraph(action1, action2, action3);
-			var expectedPlan = new INode[] { action1, action2, action3 };
+			var node1 = GOAPUtil.CreateFakeNode();
+			var node2 = GOAPUtil.CreateFakeNode();
+			node2.Parent.Returns(node1);
+			var node3 = GOAPUtil.CreateFakeNode();
+			node3.Parent.Returns(node2);
+			var graph = CreateActionGraph(node1, node2, node3);
+			var expectedPlan = new INode[] { node1, node2, node3 };
 
-			var plan = graph.BuildPlan(action3);
+			var plan = graph.BuildPlan(node3);
 
 			Assert.AreEqual(expectedPlan, plan);
 		}
@@ -53,44 +53,82 @@ namespace GOAP.Tests.Unit.GOAP
 		[Test]
 		public void GetNeighbors_OneActionSatisfyingPrecondition_ReturnsAction()
 		{
-			var action1 = GOAPUtil.CreateFakeAction();
-			var action2 = GOAPUtil.CreateFakeAction();
-			action2.SatisfiesPrecondition(action1.Precondition).Returns(true);
-			var graph = CreateActionGraph(action1, action2);
+			var node1 = GOAPUtil.CreateFakeNode();
+			var node2 = GOAPUtil.CreateFakeNode();
+			node2.SatisfiesPrecondition(node1.State).Returns(true);
+			var graph = CreateActionGraph(node1, node2);
 
-			var neighbors = graph.GetNeighbors(action1);
+			var neighbors = graph.GetNeighbors(node1);
 
-			Assert.AreSame(action2, neighbors[0]);
+			Assert.AreSame(node2, neighbors[0]);
 		}
 
 		[Test]
 		public void GetNeighbors_NoActionSatisfyingPrecondition_ReturnsNoAction()
 		{
-			var action1 = GOAPUtil.CreateFakeAction();
-			var action2 = GOAPUtil.CreateFakeAction();
-			var graph = CreateActionGraph(action1, action2);
+			var node1 = GOAPUtil.CreateFakeNode();
+			var node2 = GOAPUtil.CreateFakeNode();
+			var graph = CreateActionGraph(node1, node2);
 
-			var neighbors = graph.GetNeighbors(action1);
+			var neighbors = graph.GetNeighbors(node1);
 
 			Assert.IsEmpty(neighbors);
 		}
 
 		[Test]
-		public void CalculateEstimatedCost_TwoValidActions_ReturnsCost()
+		public void CalculateEstimatedCost_TwoNodeStatesWithOneDifferentProperty_ReturnsCost()
 		{
-			var action1 = GOAPUtil.CreateFakeAction();
-			var action2 = GOAPUtil.CreateFakeAction();
-			var actionGraph = CreateActionGraph(action1, action2);
+			string propertyKey = "IsTrue";
+			var stateProperty1 = GOAPUtil.CreateFakeStateProperty(propertyKey, false);
+			var stateProperty2 = GOAPUtil.CreateFakeStateProperty(propertyKey, true);
+            var state1 = GOAPUtil.CreateFakeWorldState(stateProperty1);
+			var state2 = GOAPUtil.CreateFakeWorldState(stateProperty2);
+			var node1 = GOAPUtil.CreateFakeNode(state1);
+			var node2 = GOAPUtil.CreateFakeNode(state2);
+			var actionGraph = CreateActionGraph(node1, node2);
 			const float expectedCost = 1f;
 
-			var estimatedCost = actionGraph.CalculateEstimatedCost(action1, action2);
+			var estimatedCost = actionGraph.CalculateEstimatedCost(node1, node2);
 
 			Assert.AreEqual(expectedCost, estimatedCost);
 		}
 
-		private static IGraph CreateActionGraph(params IAction[] actions)
+		[Test]
+		public void IsDone_TwoEqualStates_ReturnsTrue()
 		{
-			return new ActionGraph(actions);
+			string propertyKey = "IsTrue";
+			var stateProperty1 = GOAPUtil.CreateFakeStateProperty(propertyKey, false);
+			var state1 = GOAPUtil.CreateFakeWorldState(stateProperty1);
+			var state2 = GOAPUtil.CreateFakeWorldState(stateProperty1);
+			var node1 = GOAPUtil.CreateFakeNode(state1);
+			var node2 = GOAPUtil.CreateFakeNode(state2);
+			var graph = CreateActionGraph(node1, node2);
+
+			bool isDone = graph.IsDone(node1, node2);
+
+			Assert.IsTrue(isDone);
+		}
+
+		[Test]
+		public void IsDone_TwoNoneEqualStates_ReturnsFalse()
+		{
+			string propertyKey = "IsTrue";
+			var stateProperty1 = GOAPUtil.CreateFakeStateProperty(propertyKey, false);
+			var stateProperty2 = GOAPUtil.CreateFakeStateProperty(propertyKey, true);
+			var state1 = GOAPUtil.CreateFakeWorldState(stateProperty1);
+			var state2 = GOAPUtil.CreateFakeWorldState(stateProperty2);
+			var node1 = GOAPUtil.CreateFakeNode(state1);
+			var node2 = GOAPUtil.CreateFakeNode(state2);
+			var graph = CreateActionGraph(node1, node2);
+
+			bool isDone = graph.IsDone(node1, node2);
+
+			Assert.IsFalse(isDone);
+		}
+
+		private static IGraph CreateActionGraph(params IGOAPNode[] nodes)
+		{
+			return new ActionGraph(nodes);
 		}
 	}
 }

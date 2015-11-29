@@ -2,9 +2,9 @@
 
 namespace GOAP
 {
-	public interface IAction : INode
+	public interface IGOAPNode : INode
 	{
-		IWorldState[] Precondition { get; set; }
+		IWorldState State { get; }
 
 		bool SatisfiesPrecondition(object precondition);
 	}
