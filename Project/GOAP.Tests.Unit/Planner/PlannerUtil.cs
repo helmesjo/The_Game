@@ -14,7 +14,7 @@ namespace GOAP.Tests.Unit.Planner
 			return plannerList;
 		}
 
-		internal static IGraph CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out INode[] bestPlan)
+		internal static IGraph<INode> CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out INode[] bestPlan)
 		{
 			startNode = CreateFakeNode();
 			endNode = CreateFakeNode();
@@ -44,9 +44,9 @@ namespace GOAP.Tests.Unit.Planner
 			return graph;
 		}
 
-		internal static IGraph CreateFakeGraph(params INode[] nodes)
+		internal static IGraph<INode> CreateFakeGraph(params INode[] nodes)
 		{
-			var graph = Substitute.For<IGraph>();
+			var graph = Substitute.For<IGraph<INode>>();
 			graph.IsDone(Arg.Any<INode>(), Arg.Any<INode>()).Returns(false);
 
 			graph.HasNode(Arg.Any<INode>()).Returns(callInfo => {

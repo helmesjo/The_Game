@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionGraph.cs" />
+    <Compile Include="IAction.cs" />
     <Compile Include="IGOAPNode.cs" />
     <Compile Include="IWorldState.cs" />
     <Compile Include="IWorldStateProperty.cs" />

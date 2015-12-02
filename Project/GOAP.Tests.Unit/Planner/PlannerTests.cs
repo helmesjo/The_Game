@@ -89,9 +89,9 @@ namespace GOAP.Tests.Unit.Planner
 				Assert.AreSame(bestPlan[i], plan[i]);
 		}
 
-		private static IPlanner CreatePlanner(IGraph graph)
+		private static IPlanner<INode> CreatePlanner(IGraph<INode> graph)
 		{
-			return new AStarPlanner(graph);
+			return new AStarPlanner<INode>(graph);
 		}
 	}
 }

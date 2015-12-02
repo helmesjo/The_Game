@@ -2,8 +2,8 @@
 
 namespace GOAP
 {
-	public interface IPlanner
+	public interface IPlanner<T>
 	{
-		INode[] FindPlan(INode start, INode end);
+		T[] FindPlan(INode start, INode end);
 	}
 }

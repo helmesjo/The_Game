@@ -9,14 +9,27 @@ namespace GOAP.Tests.Unit.GOAP
 		internal static IGOAPNode CreateFakeNode()
 		{
 			var state = CreateFakeWorldState();
-			return CreateFakeNode(state);
+			var action = CreateFakeAction();
+			return CreateFakeNode(state, action);
 		}
+
+		internal static IAction CreateFakeAction()
+		{
+			var action = Substitute.For<IAction>();
+			return action;
+		}
+
 		internal static IGOAPNode CreateFakeNode(IWorldState state)
 		{
-			var action = Substitute.For<IGOAPNode>();
-			action.Parent.Returns(x=>null);
-			action.State.Returns(state);
-            return action;
+			var action = CreateFakeAction();
+			return CreateFakeNode(state, action);
+		}
+		internal static IGOAPNode CreateFakeNode(IWorldState state, IAction action)
+		{
+			var node = Substitute.For<IGOAPNode>();
+			node.Parent.Returns(x=>null);
+			node.State.Returns(state);
+            return node;
 		}
 
 		internal static IWorldState CreateFakeWorldState(params IWorldStateProperty[] properties)

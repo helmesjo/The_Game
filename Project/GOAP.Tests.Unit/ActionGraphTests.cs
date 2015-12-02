@@ -43,7 +43,7 @@ namespace GOAP.Tests.Unit.GOAP
 			var node3 = GOAPUtil.CreateFakeNode();
 			node3.Parent.Returns(node2);
 			var graph = CreateActionGraph(node1, node2, node3);
-			var expectedPlan = new INode[] { node1, node2, node3 };
+			var expectedPlan = new IAction[] { node1.Action, node2.Action, node3.Action };
 
 			var plan = graph.BuildPlan(node3);
 
@@ -126,7 +126,7 @@ namespace GOAP.Tests.Unit.GOAP
 			Assert.IsFalse(isDone);
 		}
 
-		private static IGraph CreateActionGraph(params IGOAPNode[] nodes)
+		private static IGraph<IAction> CreateActionGraph(params IGOAPNode[] nodes)
 		{
 			return new ActionGraph(nodes);
 		}

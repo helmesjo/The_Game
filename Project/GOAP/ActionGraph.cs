@@ -5,7 +5,7 @@ using GOAP.Planner;
 
 namespace GOAP
 {
-	public class ActionGraph : IGraph
+	public class ActionGraph : IGraph<IAction>
 	{
 		private IGOAPNode[] nodes = new IGOAPNode[0];
 
@@ -14,14 +14,15 @@ namespace GOAP
 			this.nodes = nodes;
         }
 
-		public INode[] BuildPlan(INode endNode)
+		public IAction[] BuildPlan(INode endNode)
 		{
-			var plan = new Stack<INode>();
+			var plan = new Stack<IAction>();
 
 			while(endNode != null)
 			{
-				plan.Push(endNode);
-				endNode = endNode.Parent;
+				var goapNode = endNode as IGOAPNode;
+				plan.Push(goapNode.Action);
+				endNode = goapNode.Parent;
 			}
 
 			return plan.ToArray();

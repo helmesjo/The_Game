@@ -2,19 +2,19 @@
 
 namespace GOAP.Planner
 {
-	public class AStarPlanner : IPlanner
+	public class AStarPlanner<T> : IPlanner<T>
 	{
-		private IGraph graph;
+		private IGraph<T> graph;
 		private IPlannerList visitedNodes = new OpenList();
 
-		public AStarPlanner(IGraph graph)
+		public AStarPlanner(IGraph<T> graph)
 		{
 			this.graph = graph;
 		}
 
-		public INode[] FindPlan(INode startNode, INode endNode)
+		public T[] FindPlan(INode startNode, INode endNode)
 		{
-			var plan = new INode[] { };
+			var plan = new T[] { };
             visitedNodes.Clear();
 			ResetNode(ref startNode);
 			startNode.EstimatedTotalCost = float.MaxValue;
