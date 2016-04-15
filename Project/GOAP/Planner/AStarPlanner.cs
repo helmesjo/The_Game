@@ -12,9 +12,9 @@ namespace GOAP.Planner
 			this.graph = graph;
 		}
 
-		public T[] FindPlan(INode startNode, INode endNode)
+		public ICollection<T> FindPlan(INode startNode, INode endNode)
 		{
-			var plan = new T[] { };
+			ICollection<T> plan = new T[0];
             visitedNodes.Clear();
 			ResetNode(ref startNode);
 			startNode.EstimatedTotalCost = float.MaxValue;

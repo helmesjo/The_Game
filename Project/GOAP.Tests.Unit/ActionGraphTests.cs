@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using NUnit.Framework;
 using NSubstitute;
@@ -60,7 +61,7 @@ namespace GOAP.Tests.Unit.GOAP
 
 			var neighbors = graph.GetNeighbors(node1);
 
-			Assert.AreSame(node2, neighbors[0]);
+			Assert.AreSame(node2, neighbors.ElementAt(0));
 		}
 
 		[Test]

@@ -1,9 +1,10 @@
 ﻿using GOAP.Planner;
+using System.Collections.Generic;
 
 namespace GOAP
 {
 	public interface IPlanner<T>
 	{
-		T[] FindPlan(INode start, INode end);
+		ICollection<T> FindPlan(INode start, INode end);
 	}
 }

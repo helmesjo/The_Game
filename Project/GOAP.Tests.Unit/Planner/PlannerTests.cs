@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System.Linq;
 
 using NUnit.Framework;
 using NSubstitute;
 using GOAP.Planner;
+using System.Collections.Generic;
 
 namespace GOAP.Tests.Unit.Planner
 {
@@ -21,8 +22,8 @@ namespace GOAP.Tests.Unit.Planner
 
 			var plan = planner.FindPlan(startNode, endNode);
 
-			Assert.AreSame(startNode, plan[0]);
-			Assert.AreSame(endNode, plan[plan.Length - 1]);
+			Assert.AreSame(startNode, plan.ElementAt(0));
+			Assert.AreSame(endNode, plan.ElementAt(plan.Count - 1));
 		}
 
 		[Test]
@@ -35,8 +36,8 @@ namespace GOAP.Tests.Unit.Planner
 
 			var plan = planner.FindPlan(startNode, startNode);
 
-			Assert.IsTrue(plan.Length == 1);
-			Assert.AreSame(startNode, plan[0]);
+			Assert.IsTrue(plan.Count == 1);
+			Assert.AreSame(startNode, plan.ElementAt(0));
 		}
 
 		[Test]
@@ -49,7 +50,7 @@ namespace GOAP.Tests.Unit.Planner
 
 			var plan = planner.FindPlan(startNode, endNode);
 
-			Assert.IsTrue(plan.Length == 0);
+			Assert.IsTrue(plan.Count == 0);
 		}
 
 		[Test]
@@ -67,10 +68,10 @@ namespace GOAP.Tests.Unit.Planner
 			var plan = planner.FindPlan(startNode, endNode);
 
 			int expectedPlanLength = 3;
-			Assert.AreEqual(expectedPlanLength, plan.Length);
-			Assert.AreSame(startNode, plan[0]);
-			Assert.AreSame(middleNode, plan[1]);
-			Assert.AreSame(endNode, plan[2]);
+			Assert.AreEqual(expectedPlanLength, plan.Count);
+			Assert.AreSame(startNode, plan.ElementAt(0));
+			Assert.AreSame(middleNode, plan.ElementAt(1));
+			Assert.AreSame(endNode, plan.ElementAt(2));
 		}
 
 		[Test]
@@ -78,15 +79,15 @@ namespace GOAP.Tests.Unit.Planner
 		{
 			INode startNode = null;
 			INode endNode = null;
-			INode[] bestPlan = null;
+			ICollection<INode> bestPlan = null;
 			var graph = PlannerUtil.CreateGraphWithMultiplePlans(out startNode, out endNode, out bestPlan);
 			var planner = CreatePlanner(graph);
 
 			var plan = planner.FindPlan(startNode, endNode);
 
-			Assert.AreEqual(bestPlan.Length, plan.Length);
-			for (int i = 0; i < bestPlan.Length; ++i)
-				Assert.AreSame(bestPlan[i], plan[i]);
+			Assert.AreEqual(bestPlan.Count, plan.Count);
+			for (int i = 0; i < bestPlan.Count; ++i)
+				Assert.AreSame(bestPlan.ElementAt(i), plan.ElementAt(i));
 		}
 
 		private static IPlanner<INode> CreatePlanner(IGraph<INode> graph)

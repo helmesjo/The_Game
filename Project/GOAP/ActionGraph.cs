@@ -14,7 +14,7 @@ namespace GOAP
 			this.nodes = nodes;
         }
 
-		public IAction[] BuildPlan(INode endNode)
+		public ICollection<IAction> BuildPlan(INode endNode)
 		{
 			var plan = new Stack<IAction>();
 
@@ -47,7 +47,7 @@ namespace GOAP
 			return counter;
 		}
 
-		public INode[] GetNeighbors(INode node)
+		public ICollection<INode> GetNeighbors(INode node)
 		{
 			var action = node as IGOAPNode;
 

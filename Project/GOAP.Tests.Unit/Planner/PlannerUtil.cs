@@ -14,7 +14,7 @@ namespace GOAP.Tests.Unit.Planner
 			return plannerList;
 		}
 
-		internal static IGraph<INode> CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out INode[] bestPlan)
+		internal static IGraph<INode> CreateGraphWithMultiplePlans(out INode startNode, out INode endNode, out ICollection<INode> bestPlan)
 		{
 			startNode = CreateFakeNode();
 			endNode = CreateFakeNode();
@@ -24,7 +24,7 @@ namespace GOAP.Tests.Unit.Planner
 
 			var graph = CreateFakeGraph(startNode, node2, node3, endNode);
 			//		1 - 3 - E
-			// s  <	  /
+			// s  <	   /
 			//		2
 
 			graph.GetNeighbors(startNode).Returns(new INode[] { node1, node2 });
